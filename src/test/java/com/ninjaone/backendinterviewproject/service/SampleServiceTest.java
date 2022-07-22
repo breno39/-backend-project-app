@@ -1,7 +1,8 @@
 package com.ninjaone.backendinterviewproject.service;
 
-import com.ninjaone.backendinterviewproject.database.SampleRepository;
-import com.ninjaone.backendinterviewproject.model.Sample;
+import com.ninjaone.backendinterviewproject.sample.database.SampleRepository;
+import com.ninjaone.backendinterviewproject.sample.model.Sample;
+import com.ninjaone.backendinterviewproject.sample.service.SampleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
