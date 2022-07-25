@@ -1,5 +1,6 @@
 package com.ninjaone.backendinterviewproject.service.domain;
 
+import com.ninjaone.backendinterviewproject.device.domain.Device;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -15,12 +16,12 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(indexes = @Index(columnList = "type"))
 public class Service {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
+    @Column(name = "device_id")
+    private UUID deviceId;
 
     @Column(name = "created_date", nullable = false, updatable = false)
     @CreationTimestamp
@@ -42,17 +43,23 @@ public class Service {
         this.MonthlyCost = type.getCost();
     }
 
+    public Service(ServiceType type, Device device) {
+        this.deviceId = device.getId();
+        this.type = type;
+        this.MonthlyCost = type.getCost();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Service service = (Service) o;
-        return (id.equals(service.id) && type==service.type);
+        return deviceId.equals(service.getDeviceId()) && type==service.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type);
+        return Objects.hash(deviceId, type);
     }
 
     public boolean isType(ServiceType type) {

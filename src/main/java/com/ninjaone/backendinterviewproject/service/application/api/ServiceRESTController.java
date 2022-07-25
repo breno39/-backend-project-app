@@ -34,8 +34,8 @@ public class ServiceRESTController implements ServiceAPI{
                                                                   UriComponentsBuilder uriBuilder) {
         logger.info("[START] - ServiceRESTController - addAvailableServiceToDevice");
         Service createdService = service.addAvailableServiceToDevice(serviceForm.getType(), deviceId, customerId);
-        URI uri = uriBuilder.path(SERVICE_CREATED_PATH.concat(createdService.getId().toString()))
-                        .buildAndExpand(createdService.getId()).toUri();
+        URI uri = uriBuilder.path(SERVICE_CREATED_PATH.concat(createdService.getDeviceId().toString()))
+                        .buildAndExpand(createdService.getDeviceId()).toUri();
         logger.info("[FINISH] - ServiceRESTController - addAvailableServiceToDevice");
         return ResponseEntity.created(uri).body(new ServiceDTO(createdService));
     }

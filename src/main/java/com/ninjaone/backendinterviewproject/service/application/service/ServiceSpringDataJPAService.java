@@ -39,7 +39,7 @@ public class ServiceSpringDataJPAService implements ServiceService{
         logger.info("[START] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
         Device returnedDevice = deviceService.getDeviceById(deviceId, customerId);
         if(verifyServiceTypeExistsInDevice(type, returnedDevice).isEmpty()) {
-            var createdService= serviceRepository.createService(new com.ninjaone.backendinterviewproject.service.domain.Service(type));
+            var createdService= serviceRepository.createService(new com.ninjaone.backendinterviewproject.service.domain.Service(type, returnedDevice));
             returnedDevice.addService(createdService);
             deviceService.updateDevice(returnedDevice, deviceId, customerId);
             logger.info("[FINISH] - ServiceSpringDataJPAService - addAvailableServiceToDevice");

@@ -17,7 +17,7 @@ public class ServiceJpaRepository implements ServiceRepository {
     @Override
     public Service createService(Service service) {
         logger.info("[START] - ServiceJpaRepository - createService");
-        Service createdService = repository.saveAndFlush(service);
+        Service createdService = repository.save(service);
         logger.info("[FINISH] - ServiceJpaRepository - createService");
         return createdService;
     }

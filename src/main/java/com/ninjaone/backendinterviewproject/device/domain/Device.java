@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "device")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -22,11 +22,6 @@ public class DeviceJpaRepository implements DeviceRepository {
     @Override
     public Device createDevice(Device device) {
         logger.info("[START] - DeviceJpaRepository - createDevice");
-
-        if(!device.getServices().isEmpty()) {
-            serviceRepository.saveAllAndFlush(device.getServices());
-        }
-
         Device createdDevice = deviceRepository.save(device);
         logger.info("[FINISH] - DeviceJpaRepository - createDevice");
         return createdDevice;
