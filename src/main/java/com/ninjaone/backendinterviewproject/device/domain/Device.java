@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -49,17 +50,20 @@ public class Device {
     @Builder.Default
     @EqualsAndHashCode.Exclude
     @ElementCollection(targetClass=Service.class)
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "device", orphanRemoval = true)
     private Set<Service> services = new HashSet<>();
 
-    public void addService(Service service) {
+    public Service addService(Service service) {
         checkServiceCompatibility(service.getType());
         this.services.add(service);
+        service.setDevice(this);
         this.calculateTotalMonthlyCost();
+        return service;
     }
 
     public void RemoveService(Service service) {
         this.services.remove(service);
+        service.setDevice(null);
         this.calculateTotalMonthlyCost();
     }
 
@@ -75,7 +79,11 @@ public class Device {
     }
 
     public boolean isCompatible(ServiceType type) {
-        return this.type.getSystem() == type.getSystem();
+        return this.type.getSystem() == type.getSystem() || OperatingSystem.ANY == type.getSystem();
+    }
+
+    public Optional<Service> getServiceByServiceType(ServiceType type) {
+        return this.services.stream().filter(service -> service.isType(type)).findFirst();
     }
 
     private void calculateTotalMonthlyCost() {

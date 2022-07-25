@@ -17,12 +17,11 @@ public class DeviceJpaRepository implements DeviceRepository {
     private final Logger logger = LoggerFactory.getLogger(DeviceJpaRepository.class);
 
     private final DeviceSpringDataJPARepository deviceRepository;
-    private final ServiceSpringDataJPARepository serviceRepository;
 
     @Override
     public Device createDevice(Device device) {
         logger.info("[START] - DeviceJpaRepository - createDevice");
-        Device createdDevice = deviceRepository.save(device);
+        Device createdDevice = deviceRepository.saveAndFlush(device);
         logger.info("[FINISH] - DeviceJpaRepository - createDevice");
         return createdDevice;
     }

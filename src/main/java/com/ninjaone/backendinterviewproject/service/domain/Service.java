@@ -20,8 +20,12 @@ public class Service {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "device_id")
     private UUID id;
+
+    @Setter
+    @JoinColumn(name = "fk_device")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Device device;
 
     @Column(name = "created_date", nullable = false, updatable = false)
     @CreationTimestamp

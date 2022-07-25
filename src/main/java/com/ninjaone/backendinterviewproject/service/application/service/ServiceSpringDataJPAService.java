@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -38,12 +37,12 @@ public class ServiceSpringDataJPAService implements ServiceService{
     public com.ninjaone.backendinterviewproject.service.domain.Service addAvailableServiceToDevice(ServiceType type, UUID deviceId, UUID customerId) {
         logger.info("[START] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
         Device returnedDevice = deviceService.getDeviceById(deviceId, customerId);
-        if(verifyServiceTypeExistsInDevice(type, returnedDevice).isEmpty()) {
-            var createdService= serviceRepository.createService(new com.ninjaone.backendinterviewproject.service.domain.Service(type));
-            returnedDevice.addService(createdService);
-            deviceService.updateDevice(returnedDevice, deviceId, customerId);
+        if(returnedDevice.getServiceByServiceType(type).isEmpty()) {
+            var newService = new com.ninjaone.backendinterviewproject.service.domain.Service(type);
+            returnedDevice.addService(newService);
+            returnedDevice = deviceService.createDevice(returnedDevice);
             logger.info("[FINISH] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
-            return createdService;
+            return returnedDevice.getServiceByServiceType(type).get();
         } else {
             throw ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service already exists in Device");
         }
@@ -53,14 +52,12 @@ public class ServiceSpringDataJPAService implements ServiceService{
     public void removeAvailableServiceFromDevice(ServiceType type, UUID deviceId, UUID customerId) {
         logger.info("[START] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
         Device returnedDevice = deviceService.getDeviceById(deviceId, customerId);
-        var returnedService = verifyServiceTypeExistsInDevice(type, returnedDevice)
+        var returnedService = returnedDevice.getServiceByServiceType(type)
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service do not exists in Device"));
         returnedDevice.RemoveService(returnedService);
         deviceService.updateDevice(returnedDevice, deviceId, customerId);
         logger.info("[FINISH] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
     }
 
-    private Optional<com.ninjaone.backendinterviewproject.service.domain.Service> verifyServiceTypeExistsInDevice(ServiceType type, Device returnedDevice) {
-        return returnedDevice.getServices().stream().filter(service -> service.isType(type)).findAny();
-    }
+
 }
