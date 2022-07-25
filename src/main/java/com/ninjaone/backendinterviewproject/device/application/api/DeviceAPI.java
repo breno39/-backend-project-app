@@ -28,4 +28,8 @@ public interface DeviceAPI {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     void deleteDevice(@NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);
 
+    @GetMapping("/{deviceId}/cost")
+    @ResponseStatus(value = HttpStatus.OK)
+    ResponseEntity<DeviceTotalMonthlyCostDTO> getTotalMonthlyCostById(@NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);
+
 }

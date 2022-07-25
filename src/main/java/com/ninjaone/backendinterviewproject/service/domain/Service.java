@@ -32,7 +32,7 @@ public class Service {
     private LocalDateTime updatedDate;
 
     @Setter
-    private Integer cost;
+    private Long cost;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = false)

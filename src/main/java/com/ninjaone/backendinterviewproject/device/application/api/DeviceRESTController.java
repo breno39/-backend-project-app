@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DeviceRESTController implements DeviceAPI {
 
-    private static final StringBuilder DEVICE_CREATED_PATH = new StringBuilder("ninjaone/app/v1/device/");
+    private static final String DEVICE_CREATED_PATH = "ninjaone/app/v1/device/";
     private Logger logger = LoggerFactory.getLogger(DeviceRESTController.class);
 
     private final DeviceService service;
@@ -23,7 +23,6 @@ public class DeviceRESTController implements DeviceAPI {
     @Override
     public ResponseEntity<DeviceDTO> getDeviceById(UUID deviceId, UUID customerId) {
         logger.info("[START] - DeviceRESTController - getDeviceById");
-        logger.info(customerId.toString());
         var returnedDevice = service.getDeviceById(deviceId, customerId);
         logger.info("[FINISH] - DeviceRESTController - getDeviceById");
         return ResponseEntity.ok(new DeviceDTO(returnedDevice));
@@ -33,7 +32,7 @@ public class DeviceRESTController implements DeviceAPI {
     public ResponseEntity<DeviceDTO> createDevice(CreateDeviceForm createDeviceForm, UUID customerId, UriComponentsBuilder uriBuilder) {
         logger.info("[START] - DeviceRESTController - createDevice");
         var createdDevice = service.createDevice(createDeviceForm.toEntity());
-        URI uri = uriBuilder.path(DEVICE_CREATED_PATH.append(createdDevice.getId().toString()).toString())
+        URI uri = uriBuilder.path(DEVICE_CREATED_PATH.concat(createdDevice.getId().toString()))
                 .buildAndExpand(createdDevice.getId()).toUri();
         logger.info("[FINISH] - DeviceRESTController - createDevice");
         return ResponseEntity.created(uri).body(new DeviceDTO(createdDevice));
@@ -51,5 +50,13 @@ public class DeviceRESTController implements DeviceAPI {
         logger.info("[START] - DeviceRESTController - deleteService");
         service.deleteDevice(deviceId, customerId);
         logger.info("[FINISH] - DeviceRESTController - deleteService");
+    }
+
+    @Override
+    public ResponseEntity<DeviceTotalMonthlyCostDTO> getTotalMonthlyCostById(UUID deviceId, UUID customerId) {
+        logger.info("[START] - DeviceRESTController - getTotalMonthlyCostById");
+        var returnedDeviceTotalMonthlyCost = service.getDeviceTotalMonthlyCostById(deviceId, customerId);
+        logger.info("[FINISH] - DeviceRESTController - getTotalMonthlyCostById");
+        return ResponseEntity.ok(new DeviceTotalMonthlyCostDTO(returnedDeviceTotalMonthlyCost));
     }
 }

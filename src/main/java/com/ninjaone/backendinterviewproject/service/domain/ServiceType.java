@@ -6,8 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ServiceType {
-    WINDOWS_ANTIVIRUS(5), MAC_ANTIVIRUS(7), SCREENSHARE(1), BACKUP(3), PSA(2);
+    WINDOWS_ANTIVIRUS(5L), MAC_ANTIVIRUS(7L), SCREENSHARE(1L), BACKUP(3L), PSA(2L);
 
-    private final Integer cost;
+    private final Long cost;
 
 }

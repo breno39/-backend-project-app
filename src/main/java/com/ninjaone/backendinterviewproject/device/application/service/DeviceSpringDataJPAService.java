@@ -54,6 +54,14 @@ public class DeviceSpringDataJPAService implements DeviceService {
         logger.info("[FINISH] - DeviceSpringDataJPAService - deleteDevice");
     }
 
+    @Override
+    public Long getDeviceTotalMonthlyCostById(UUID deviceId, UUID customerId) {
+        logger.info("[START] - DeviceSpringDataJPAService - getDeviceTotalMonthlyCostById");
+        Device returnedDevice = getDeviceByIdAndCustomerId(deviceId, customerId);
+        logger.info("[FINISH] - DeviceSpringDataJPAService - getDeviceTotalMonthlyCostById");
+        return returnedDevice.getTotalMonthlyCost();
+    }
+
     private Device getDeviceByIdAndCustomerId(UUID deviceId, UUID customerId) {
         return deviceRepository.findByIdAndCustomerId(deviceId, customerId)
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.NOT_FOUND, "Device not found"));
