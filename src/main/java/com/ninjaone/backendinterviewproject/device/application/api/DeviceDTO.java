@@ -6,9 +6,9 @@ import lombok.Getter;
 
 @Getter
 public class DeviceDTO {
-    private String systemName;
+    private final String systemName;
 
-    private DeviceType type;
+    private final DeviceType type;
 
     public DeviceDTO(Device device) {
         this.systemName = device.getSystemName();

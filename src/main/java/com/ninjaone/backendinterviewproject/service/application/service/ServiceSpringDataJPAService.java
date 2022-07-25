@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ServiceSpringDataJPAService implements ServiceService{
-    private Logger logger = LoggerFactory.getLogger(ServiceSpringDataJPAService.class);
+    private final Logger logger = LoggerFactory.getLogger(ServiceSpringDataJPAService.class);
 
     private final ServiceRepository serviceRepository;
 

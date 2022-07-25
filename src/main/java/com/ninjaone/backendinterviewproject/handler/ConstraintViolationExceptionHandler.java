@@ -35,7 +35,7 @@ public class ConstraintViolationExceptionHandler {
 	}
 	
 	private List<ValidationDTO> convertToFormValidationDTO(Set<ConstraintViolation<?>> constraintViolations) {
-		return constraintViolations.stream().map(e -> toFormValidationDTO(e)).collect(Collectors.toList());
+		return constraintViolations.stream().map(this::toFormValidationDTO).collect(Collectors.toList());
 	}
 
 	private ValidationDTO toFormValidationDTO(ConstraintViolation<?> fieldError) {

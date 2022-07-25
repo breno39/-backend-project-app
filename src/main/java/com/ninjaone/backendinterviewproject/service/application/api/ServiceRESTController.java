@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ServiceRESTController implements ServiceAPI{
     private static final String SERVICE_CREATED_PATH = "ninjaone/app/v1/service/";
-    private Logger logger = LoggerFactory.getLogger(ServiceRESTController.class);
+    private final Logger logger = LoggerFactory.getLogger(ServiceRESTController.class);
     private final ServiceService service;
 
     @Override

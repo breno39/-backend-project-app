@@ -14,7 +14,7 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 public class DeviceJpaRepository implements DeviceRepository {
-    private Logger logger = LoggerFactory.getLogger(DeviceJpaRepository.class);
+    private final Logger logger = LoggerFactory.getLogger(DeviceJpaRepository.class);
 
     private final DeviceSpringDataJPARepository deviceRepository;
     private final ServiceSpringDataJPARepository serviceRepository;

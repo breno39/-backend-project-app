@@ -14,7 +14,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class DeviceSpringDataJPAService implements DeviceService {
-    private Logger logger = LoggerFactory.getLogger(DeviceSpringDataJPAService.class);
+    private final Logger logger = LoggerFactory.getLogger(DeviceSpringDataJPAService.class);
 
     private final DeviceRepository deviceRepository;
 

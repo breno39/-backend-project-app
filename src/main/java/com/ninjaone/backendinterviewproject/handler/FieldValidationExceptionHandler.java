@@ -47,7 +47,7 @@ public class FieldValidationExceptionHandler {
 	}
 	
 	private List<ValidationDTO> convertToFormValidationDTO(List<FieldError> fieldErrors, MessageSource messageSource) {
-		return fieldErrors.stream().map(e -> toFormValidationDTO(e)).collect(Collectors.toList());
+		return fieldErrors.stream().map(this::toFormValidationDTO).collect(Collectors.toList());
 	}
 	
 	private ValidationDTO toFormValidationDTO(FieldError fieldError) {

@@ -1,7 +1,6 @@
 package com.ninjaone.backendinterviewproject.device.application.repository;
 
 import com.ninjaone.backendinterviewproject.device.domain.Device;
-import com.ninjaone.backendinterviewproject.service.domain.ServiceType;
 
 import java.util.Optional;
 import java.util.UUID;
