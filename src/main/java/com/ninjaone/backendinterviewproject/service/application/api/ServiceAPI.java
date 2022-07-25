@@ -21,8 +21,9 @@ public interface ServiceAPI {
     void addAvailableServiceToDevice(@RequestBody @Valid ServiceForm serviceForm,
                                      @NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);
 
-    @GetMapping("remove")
+    @DeleteMapping("remove")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    void removeAvailableServiceFromDevice(@NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);
+    void removeAvailableServiceFromDevice(@RequestBody @Valid ServiceForm serviceForm,
+                                          @NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);
 
 }

@@ -33,8 +33,9 @@ public class ServiceRESTController implements ServiceAPI{
     }
 
     @Override
-    public void removeAvailableServiceFromDevice(UUID deviceId, UUID customerId) {
+    public void removeAvailableServiceFromDevice(ServiceForm serviceForm, UUID deviceId, UUID customerId) {
         logger.info("[START] - ServiceRESTController - getAvailableServices");
+        service.removeAvailableServiceFromDevice(serviceForm.getType(), deviceId, customerId);
         logger.info("[FINISH] - ServiceRESTController - getAvailableServices");
     }
 }

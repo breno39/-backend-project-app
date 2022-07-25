@@ -11,4 +11,6 @@ public interface ServiceService {
     Set<ServiceType> getAvailableServices();
 
     void addAvailableServiceToDevice(ServiceType service, UUID deviceId, UUID customerId);
+
+    void removeAvailableServiceFromDevice(ServiceType type, UUID deviceId, UUID customerId);
 }

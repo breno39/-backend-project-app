@@ -47,6 +47,19 @@ public class ServiceSpringDataJPAService implements ServiceService{
         logger.info("[FINISH] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
     }
 
+    @Override
+    public void removeAvailableServiceFromDevice(ServiceType type, UUID deviceId, UUID customerId) {
+        logger.info("[START] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
+        Device returnedDevice = deviceService.getDeviceById(deviceId, customerId);
+        if(verifyServiceTypeExistsInDevice(type, returnedDevice)) {
+            returnedDevice.RemoveService(type);
+            deviceService.updateDevice(returnedDevice, deviceId, customerId);
+        } else {
+            throw ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service do not exists in Device");
+        }
+        logger.info("[FINISH] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
+    }
+
     private boolean verifyServiceTypeExistsInDevice(ServiceType type, Device returnedDevice) {
         return returnedDevice.getServices().stream().anyMatch(service -> service.isType(type));
     }

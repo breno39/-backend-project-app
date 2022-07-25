@@ -36,19 +36,19 @@ public class DeviceSpringDataJPAService implements DeviceService {
 
     @Override
     public void updateDevice(Device device, UUID deviceId, UUID customerId) {
-        logger.info("[START] - DeviceSpringDataJPAService - createDevice");
+        logger.info("[START] - DeviceSpringDataJPAService - updateDevice");
         Device returnedDevice = getDeviceByIdAndCustomerId(deviceId, customerId);
         returnedDevice.setType(device.getType());
         returnedDevice.setSystemName(device.getSystemName());
         deviceRepository.updateDevice(returnedDevice);
-        logger.info("[FINISH] - DeviceSpringDataJPAService - createDevice");
+        logger.info("[FINISH] - DeviceSpringDataJPAService - updateDevice");
     }
 
     @Override
     public void deleteDevice(UUID deviceId, UUID customerId) {
-        logger.info("[START] - DeviceSpringDataJPAService - createDevice");
+        logger.info("[START] - DeviceSpringDataJPAService - deleteDevice");
         deviceRepository.deleteDevice(deviceId, customerId);
-        logger.info("[FINISH] - DeviceSpringDataJPAService - createDevice");
+        logger.info("[FINISH] - DeviceSpringDataJPAService - deleteDevice");
     }
 
     private Device getDeviceByIdAndCustomerId(UUID deviceId, UUID customerId) {
