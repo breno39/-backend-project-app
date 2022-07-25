@@ -1,9 +1,9 @@
 package com.ninjaone.backendinterviewproject.service.application.api;
 
-import com.ninjaone.backendinterviewproject.device.application.api.CreateDeviceForm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -16,12 +16,14 @@ public interface ServiceAPI {
     @ResponseStatus(value = HttpStatus.OK)
     ResponseEntity<Object> getAvailableServices();
 
-    @PostMapping("add")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    void addAvailableServiceToDevice(@RequestBody @Valid ServiceForm serviceForm,
-                                     @NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);
+    @PostMapping()
+    @ResponseStatus(value = HttpStatus.CREATED)
+    ResponseEntity<ServiceDTO> addAvailableServiceToDevice(@RequestBody @Valid ServiceForm serviceForm,
+                                                           @NotEmpty @PathVariable("deviceId") UUID deviceId,
+                                                           @NotEmpty @PathVariable("customerId") UUID customerId,
+                                                           UriComponentsBuilder uriBuilder);
 
-    @DeleteMapping("remove")
+    @DeleteMapping()
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     void removeAvailableServiceFromDevice(@RequestBody @Valid ServiceForm serviceForm,
                                           @NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);

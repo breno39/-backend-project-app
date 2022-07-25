@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface ServiceService {
     Set<ServiceType> getAvailableServices();
 
-    void addAvailableServiceToDevice(ServiceType service, UUID deviceId, UUID customerId);
+    com.ninjaone.backendinterviewproject.service.domain.Service addAvailableServiceToDevice(ServiceType service, UUID deviceId, UUID customerId);
 
     void removeAvailableServiceFromDevice(ServiceType type, UUID deviceId, UUID customerId);
 }

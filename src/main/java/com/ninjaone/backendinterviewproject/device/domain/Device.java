@@ -57,7 +57,7 @@ public class Device {
 
     private Long calculateTotalMonthlyCost() {
         totalMonthlyCost = services.stream()
-                .map(Service::getCost)
+                .map(Service::getMonthlyCost)
                 .reduce(DEVICE_COST, Long::sum);
         return totalMonthlyCost;
     }

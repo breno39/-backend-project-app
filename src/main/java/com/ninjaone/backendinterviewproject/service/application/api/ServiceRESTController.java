@@ -1,19 +1,23 @@
 package com.ninjaone.backendinterviewproject.service.application.api;
 
 import com.ninjaone.backendinterviewproject.service.application.service.ServiceService;
+import com.ninjaone.backendinterviewproject.service.domain.Service;
 import com.ninjaone.backendinterviewproject.service.domain.ServiceType;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Set;
 import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
 public class ServiceRESTController implements ServiceAPI{
+    private static final String SERVICE_CREATED_PATH = "ninjaone/app/v1/service/";
     private Logger logger = LoggerFactory.getLogger(ServiceRESTController.class);
     private final ServiceService service;
 
@@ -26,10 +30,14 @@ public class ServiceRESTController implements ServiceAPI{
     }
 
     @Override
-    public void addAvailableServiceToDevice(ServiceForm serviceForm, UUID deviceId, UUID customerId) {
+    public ResponseEntity<ServiceDTO> addAvailableServiceToDevice(ServiceForm serviceForm, UUID deviceId, UUID customerId,
+                                                                  UriComponentsBuilder uriBuilder) {
         logger.info("[START] - ServiceRESTController - addAvailableServiceToDevice");
-        service.addAvailableServiceToDevice(serviceForm.getType(), deviceId, customerId);
+        Service createdService = service.addAvailableServiceToDevice(serviceForm.getType(), deviceId, customerId);
+        URI uri = uriBuilder.path(SERVICE_CREATED_PATH.concat(createdService.getId().toString()))
+                        .buildAndExpand(createdService.getId()).toUri();
         logger.info("[FINISH] - ServiceRESTController - addAvailableServiceToDevice");
+        return ResponseEntity.created(uri).body(new ServiceDTO(createdService));
     }
 
     @Override

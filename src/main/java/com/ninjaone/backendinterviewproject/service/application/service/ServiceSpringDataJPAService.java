@@ -35,17 +35,18 @@ public class ServiceSpringDataJPAService implements ServiceService{
     }
 
     @Override
-    public void addAvailableServiceToDevice(ServiceType type, UUID deviceId, UUID customerId) {
+    public com.ninjaone.backendinterviewproject.service.domain.Service addAvailableServiceToDevice(ServiceType type, UUID deviceId, UUID customerId) {
         logger.info("[START] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
         Device returnedDevice = deviceService.getDeviceById(deviceId, customerId);
         if(verifyServiceTypeExistsInDevice(type, returnedDevice).isEmpty()) {
             var createdService= serviceRepository.createService(new com.ninjaone.backendinterviewproject.service.domain.Service(type));
             returnedDevice.addService(createdService);
             deviceService.updateDevice(returnedDevice, deviceId, customerId);
+            logger.info("[FINISH] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
+            return createdService;
         } else {
             throw ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service already exists in Device");
         }
-        logger.info("[FINISH] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
     }
 
     @Override

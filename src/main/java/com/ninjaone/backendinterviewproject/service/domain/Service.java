@@ -1,6 +1,5 @@
 package com.ninjaone.backendinterviewproject.service.domain;
 
-import com.ninjaone.backendinterviewproject.device.domain.Device;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -32,7 +31,7 @@ public class Service {
     private LocalDateTime updatedDate;
 
     @Setter
-    private Long cost;
+    private Long MonthlyCost;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = false)
@@ -40,7 +39,7 @@ public class Service {
 
     public Service(ServiceType type) {
         this.type = type;
-        this.cost = type.getCost();
+        this.MonthlyCost = type.getCost();
     }
 
     @Override
