@@ -30,7 +30,7 @@ public class DeviceRESTController implements DeviceAPI {
     }
 
     @Override
-    public ResponseEntity<DeviceDTO> createDevice(CreateDeviceForm createDeviceForm, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DeviceDTO> createDevice(CreateDeviceForm createDeviceForm, UUID customerId, UriComponentsBuilder uriBuilder) {
         logger.info("[START] - DeviceRESTController - createDevice");
         var createdDevice = service.createDevice(createDeviceForm.toEntity());
         URI uri = uriBuilder.path(DEVICE_CREATED_PATH.append(createdDevice.getId().toString()).toString())

@@ -8,11 +8,11 @@ import java.lang.annotation.*;
 
 import static java.lang.annotation.ElementType.*;
 
-@Target(value = {METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
+@Target(value = {FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = ValueOfEnumValidator.class)
-public @interface ValueOfEnum {
+public @interface MustBeInServiceType {
     Class<? extends Enum<?>> enumClass();
     String message() default "must be any of enum {enumClass}";
     Class<?>[] groups() default {};

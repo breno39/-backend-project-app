@@ -1,22 +1,28 @@
 package com.ninjaone.backendinterviewproject.service.application.api;
 
+import com.ninjaone.backendinterviewproject.device.application.api.CreateDeviceForm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import java.util.UUID;
+
 @RestController
-@RequestMapping("/service")
+@RequestMapping("customer/{customerId}/device/{deviceId}/service")
 public interface ServiceAPI {
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<Object> getAvailableServices();
+    ResponseEntity<Object> getAvailableServices();
 
     @PostMapping("add")
-    @ResponseStatus(value = HttpStatus.OK)
-    public void addAvailableServiceToDevice();
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    void addAvailableServiceToDevice(@RequestBody @Valid ServiceForm serviceForm,
+                                     @NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);
 
     @GetMapping("remove")
-    @ResponseStatus(value = HttpStatus.OK)
-    public void removeAvailableServiceFromDevice();
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    void removeAvailableServiceFromDevice(@NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);
 
 }

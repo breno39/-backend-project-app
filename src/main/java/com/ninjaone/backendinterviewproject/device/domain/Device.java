@@ -37,6 +37,10 @@ public class Device {
 
     @ElementCollection(targetClass=Service.class)
     @EqualsAndHashCode.Exclude
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Service> services;
+
+    public void addService(Service service) {
+        this.services.add(service);
+    }
 }
