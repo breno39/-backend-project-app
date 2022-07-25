@@ -1,4 +1,4 @@
-package com.ninjaone.backendinterviewproject.device.model;
+package com.ninjaone.backendinterviewproject.device.domain;
 
 import com.ninjaone.backendinterviewproject.service.domain.Service;
 import lombok.*;
