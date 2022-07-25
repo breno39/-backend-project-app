@@ -1,7 +1,6 @@
 package com.ninjaone.backendinterviewproject.device.domain;
 
 import com.ninjaone.backendinterviewproject.service.domain.Service;
-import com.ninjaone.backendinterviewproject.service.domain.ServiceType;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -45,7 +44,7 @@ public class Device {
         this.services.add(service);
     }
 
-    public void RemoveService(ServiceType type) {
-        this.services.remove(new Service(type));
+    public void RemoveService(Service service) {
+        this.services.remove(service);
     }
 }

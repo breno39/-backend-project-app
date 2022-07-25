@@ -48,7 +48,7 @@ public class Service {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Service service = (Service) o;
-        return id.equals(service.id) || type == service.type;
+        return (id.equals(service.id) && type==service.type);
     }
 
     @Override

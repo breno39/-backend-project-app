@@ -40,6 +40,9 @@ public class DeviceSpringDataJPAService implements DeviceService {
         Device returnedDevice = getDeviceByIdAndCustomerId(deviceId, customerId);
         returnedDevice.setType(device.getType());
         returnedDevice.setSystemName(device.getSystemName());
+        if(!device.getServices().isEmpty()) {
+            returnedDevice.setServices(device.getServices());
+        }
         deviceRepository.updateDevice(returnedDevice);
         logger.info("[FINISH] - DeviceSpringDataJPAService - updateDevice");
     }
