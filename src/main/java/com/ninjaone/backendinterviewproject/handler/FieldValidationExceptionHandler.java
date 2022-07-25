@@ -3,6 +3,7 @@ package com.ninjaone.backendinterviewproject.handler;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,15 @@ public class FieldValidationExceptionHandler {
 	public ErrorApiDTO handle(MethodArgumentNotValidException ex) {
 		log.error("Validation Errors: {}", ex.getMessage());
 		return buildErrorApiDTO(ex);
+	}
+
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(InvalidFormatException.class)
+	public ErrorApiDTO handle(InvalidFormatException ex) {
+		log.error("Enum Validation Error: {}", ex.getMessage());
+		return ErrorApiDTO.builder()
+				.message("NOT A VALID ENUM TYPE")
+				.build();
 	}
     
 	private ErrorApiDTO buildErrorApiDTO(MethodArgumentNotValidException ex) {
