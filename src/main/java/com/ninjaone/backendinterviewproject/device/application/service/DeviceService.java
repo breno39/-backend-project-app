@@ -11,7 +11,7 @@ public interface DeviceService {
 
     Device createDevice(Device device);
 
-    void updateDevice(Device device, UUID deviceId, UUID customerId);
+    Device updateDevice(Device device, UUID deviceId, UUID customerId);
 
     void deleteDevice(UUID deviceId, UUID customerId);
 

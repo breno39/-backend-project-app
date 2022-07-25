@@ -40,7 +40,7 @@ public class DeviceSpringDataJPAService implements DeviceService {
     }
 
     @Override
-    public void updateDevice(Device device, UUID deviceId, UUID customerId) {
+    public Device updateDevice(Device device, UUID deviceId, UUID customerId) {
         logger.info("[START] - DeviceSpringDataJPAService - updateDevice");
         Device returnedDevice = getDeviceByIdAndCustomerId(deviceId, customerId);
         returnedDevice.setType(device.getType());
@@ -48,8 +48,9 @@ public class DeviceSpringDataJPAService implements DeviceService {
         if(!device.getServices().isEmpty()) {
             returnedDevice.setServices(device.getServices());
         }
-        deviceRepository.updateDevice(returnedDevice);
+        Device updatedDevice = deviceRepository.updateDevice(returnedDevice);
         logger.info("[FINISH] - DeviceSpringDataJPAService - updateDevice");
+        return updatedDevice;
     }
 
     @Override

@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 public class ServiceSpringDataJPAService implements ServiceService{
     private final Logger logger = LoggerFactory.getLogger(ServiceSpringDataJPAService.class);
 
-    private final ServiceRepository serviceRepository;
-
     private final DeviceService deviceService;
 
     @Override
@@ -40,7 +38,7 @@ public class ServiceSpringDataJPAService implements ServiceService{
         if(returnedDevice.getServiceByServiceType(type).isEmpty()) {
             var newService = new com.ninjaone.backendinterviewproject.service.domain.Service(type);
             returnedDevice.addService(newService);
-            returnedDevice = deviceService.createDevice(returnedDevice);
+            returnedDevice = deviceService.updateDevice(returnedDevice, deviceId, customerId);
             logger.info("[FINISH] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
             return returnedDevice.getServiceByServiceType(type).get();
         } else {

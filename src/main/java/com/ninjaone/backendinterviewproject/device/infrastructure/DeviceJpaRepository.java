@@ -2,7 +2,6 @@ package com.ninjaone.backendinterviewproject.device.infrastructure;
 
 import com.ninjaone.backendinterviewproject.device.application.repository.DeviceRepository;
 import com.ninjaone.backendinterviewproject.device.domain.Device;
-import com.ninjaone.backendinterviewproject.service.infrastructure.ServiceSpringDataJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,9 +41,10 @@ public class DeviceJpaRepository implements DeviceRepository {
     }
 
     @Override
-    public void updateDevice(Device device) {
+    public Device updateDevice(Device device) {
         logger.info("[START] - DeviceJpaRepository - updateDevice");
         deviceRepository.save(device);
         logger.info("[FINISH] - DeviceJpaRepository - updateDevice");
+        return device;
     }
 }

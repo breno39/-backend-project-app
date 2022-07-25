@@ -12,5 +12,5 @@ public interface DeviceRepository {
 
     Optional<Device> findByIdAndCustomerId(UUID deviceId, UUID customerId);
 
-    void updateDevice(Device device);
+    Device updateDevice(Device device);
 }
