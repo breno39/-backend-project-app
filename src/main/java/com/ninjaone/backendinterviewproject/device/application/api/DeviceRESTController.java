@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DeviceRESTController implements DeviceAPI {
 
-    private static final String DEVICE_CREATED_PATH = "ninjaone/app/v1/device/{deviceId}";
+    private static final StringBuilder DEVICE_CREATED_PATH = new StringBuilder("ninjaone/app/v1/device/");
     private Logger logger = LoggerFactory.getLogger(DeviceRESTController.class);
 
     private final DeviceService service;
@@ -23,6 +23,7 @@ public class DeviceRESTController implements DeviceAPI {
     @Override
     public ResponseEntity<DeviceDTO> getDeviceById(UUID deviceId, UUID customerId) {
         logger.info("[START] - DeviceRESTController - getDeviceById");
+        logger.info(customerId.toString());
         var returnedDevice = service.getDeviceById(deviceId, customerId);
         logger.info("[FINISH] - DeviceRESTController - getDeviceById");
         return ResponseEntity.ok(new DeviceDTO(returnedDevice));
@@ -32,7 +33,8 @@ public class DeviceRESTController implements DeviceAPI {
     public ResponseEntity<DeviceDTO> createDevice(CreateDeviceForm createDeviceForm, UriComponentsBuilder uriBuilder) {
         logger.info("[START] - DeviceRESTController - createDevice");
         var createdDevice = service.createDevice(createDeviceForm.toEntity());
-        URI uri = uriBuilder.path(DEVICE_CREATED_PATH).buildAndExpand(createdDevice.getId()).toUri();
+        URI uri = uriBuilder.path(DEVICE_CREATED_PATH.append(createdDevice.getId().toString()).toString())
+                .buildAndExpand(createdDevice.getId()).toUri();
         logger.info("[FINISH] - DeviceRESTController - createDevice");
         return ResponseEntity.created(uri).body(new DeviceDTO(createdDevice));
     }
