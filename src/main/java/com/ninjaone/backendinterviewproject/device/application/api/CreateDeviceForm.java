@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
@@ -20,7 +19,9 @@ public class CreateDeviceForm extends DeviceForm{
     @Override
     public Device toEntity() {
         Device returnedDevice = super.toEntity();
-        returnedDevice.setServices(services.stream().map(ServiceForm::toEntity).collect(Collectors.toUnmodifiableSet()));
+        for(ServiceForm service : services) {
+            returnedDevice.addService(service.toEntity());
+        }
         return returnedDevice;
     }
 }

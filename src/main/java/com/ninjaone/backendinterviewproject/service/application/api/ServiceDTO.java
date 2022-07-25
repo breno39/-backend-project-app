@@ -17,7 +17,7 @@ public class ServiceDTO {
     private Long MonthlyCost;
 
     public ServiceDTO(Service createdService) {
-        id = createdService.getDeviceId();
+        id = createdService.getId();
         type = createdService.getType();
         MonthlyCost = createdService.getMonthlyCost();
     }

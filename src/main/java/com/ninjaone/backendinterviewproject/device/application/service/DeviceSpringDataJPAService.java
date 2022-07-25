@@ -35,10 +35,8 @@ public class DeviceSpringDataJPAService implements DeviceService {
             logger.info("[FINISH] - DeviceSpringDataJPAService - createDevice");
             return createdDevice;
         } catch (DataIntegrityViolationException ex) {
-            ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Device already exists");
+            throw ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Device already exists");
         }
-
-        return device;
     }
 
     @Override

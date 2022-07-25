@@ -21,7 +21,7 @@ public class Service {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "device_id")
-    private UUID deviceId;
+    private UUID id;
 
     @Column(name = "created_date", nullable = false, updatable = false)
     @CreationTimestamp
@@ -31,7 +31,6 @@ public class Service {
     @UpdateTimestamp
     private LocalDateTime updatedDate;
 
-    @Setter
     private Long MonthlyCost;
 
     @Enumerated(EnumType.STRING)
@@ -43,23 +42,17 @@ public class Service {
         this.MonthlyCost = type.getCost();
     }
 
-    public Service(ServiceType type, Device device) {
-        this.deviceId = device.getId();
-        this.type = type;
-        this.MonthlyCost = type.getCost();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Service service = (Service) o;
-        return deviceId.equals(service.getDeviceId()) && type==service.type;
+        return id.equals(service.getId()) && type==service.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deviceId, type);
+        return Objects.hash(id, type);
     }
 
     public boolean isType(ServiceType type) {
