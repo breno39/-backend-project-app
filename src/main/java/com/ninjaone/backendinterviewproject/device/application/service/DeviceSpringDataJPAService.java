@@ -6,6 +6,7 @@ import com.ninjaone.backendinterviewproject.handler.ApiException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +30,15 @@ public class DeviceSpringDataJPAService implements DeviceService {
     @Override
     public Device createDevice(Device device) {
         logger.info("[START] - DeviceSpringDataJPAService - createDevice");
-        Device createdDevice = deviceRepository.createDevice(device);
-        logger.info("[FINISH] - DeviceSpringDataJPAService - createDevice");
-        return createdDevice;
+        try {
+            Device createdDevice = deviceRepository.createDevice(device);
+            logger.info("[FINISH] - DeviceSpringDataJPAService - createDevice");
+            return createdDevice;
+        } catch (DataIntegrityViolationException ex) {
+            ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Device already exists");
+        }
+
+        return device;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.ninjaone.backendinterviewproject.device.domain;
 
+import com.ninjaone.backendinterviewproject.customer.domain.Customer;
 import com.ninjaone.backendinterviewproject.service.domain.Service;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity(name = "device")
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,6 +34,7 @@ public class Device {
     @UpdateTimestamp
     private LocalDateTime updatedDate;
 
+    @Column(unique = true)
     private String systemName;
 
     private DeviceType type;
