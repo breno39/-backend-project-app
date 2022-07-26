@@ -3,7 +3,6 @@ package com.ninjaone.backendinterviewproject.service.application.service;
 import com.ninjaone.backendinterviewproject.device.application.service.DeviceService;
 import com.ninjaone.backendinterviewproject.device.domain.Device;
 import com.ninjaone.backendinterviewproject.handler.ApiException;
-import com.ninjaone.backendinterviewproject.service.application.repository.ServiceRepository;
 import com.ninjaone.backendinterviewproject.service.domain.ServiceType;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -52,7 +51,7 @@ public class ServiceSpringDataJPAService implements ServiceService{
         Device returnedDevice = deviceService.getDeviceById(deviceId, customerId);
         var returnedService = returnedDevice.getServiceByServiceType(type)
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service do not exists in Device"));
-        returnedDevice.RemoveService(returnedService);
+        returnedDevice.removeService(returnedService);
         deviceService.updateDevice(returnedDevice, deviceId, customerId);
         logger.info("[FINISH] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
     }

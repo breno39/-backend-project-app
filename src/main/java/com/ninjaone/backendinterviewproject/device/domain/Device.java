@@ -1,5 +1,6 @@
 package com.ninjaone.backendinterviewproject.device.domain;
 
+import com.ninjaone.backendinterviewproject.customer.domain.Customer;
 import com.ninjaone.backendinterviewproject.handler.ApiException;
 import com.ninjaone.backendinterviewproject.service.domain.Service;
 import com.ninjaone.backendinterviewproject.service.domain.ServiceType;
@@ -30,6 +31,11 @@ public class Device {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
+    @Setter
+    @JoinColumn(name = "fk_customer")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Customer customer;
+
     @Column(name = "created_date", nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdDate;
@@ -53,15 +59,14 @@ public class Device {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "device", orphanRemoval = true)
     private Set<Service> services = new HashSet<>();
 
-    public Service addService(Service service) {
+    public void addService(Service service) {
         checkServiceCompatibility(service.getType());
         this.services.add(service);
         service.setDevice(this);
         this.calculateTotalMonthlyCost();
-        return service;
     }
 
-    public void RemoveService(Service service) {
+    public void removeService(Service service) {
         this.services.remove(service);
         service.setDevice(null);
         this.calculateTotalMonthlyCost();

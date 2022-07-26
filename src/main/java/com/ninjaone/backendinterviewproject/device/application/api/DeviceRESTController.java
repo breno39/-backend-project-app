@@ -1,6 +1,7 @@
 package com.ninjaone.backendinterviewproject.device.application.api;
 
 import com.ninjaone.backendinterviewproject.device.application.service.DeviceService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@SecurityRequirement(name = "openApiAuth")
 public class DeviceRESTController implements DeviceAPI {
 
     private static final String DEVICE_CREATED_PATH = "ninjaone/app/v1/device/";
