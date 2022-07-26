@@ -7,13 +7,13 @@ import java.util.UUID;
 
 @Service
 public interface DeviceService {
-    Device getDeviceById(UUID deviceId, UUID customerId);
+    Device getDeviceById(UUID deviceId);
 
-    Device createDevice(Device device);
+    Device createDevice(Device device, UUID customerId);
 
-    Device updateDevice(Device device, UUID deviceId, UUID customerId);
+    Device updateDevice(Device device, UUID deviceId);
 
     void deleteDevice(UUID deviceId, UUID customerId);
 
-    Long getDeviceTotalMonthlyCostById(UUID deviceId, UUID customerId);
+    Long getDeviceTotalMonthlyCostById(UUID deviceId);
 }

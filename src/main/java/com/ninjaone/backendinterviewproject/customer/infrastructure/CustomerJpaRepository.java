@@ -35,4 +35,20 @@ public class CustomerJpaRepository implements CustomerRepository {
         logger.info("[FINISH] - createCustomer - CustomerJpaRepository");
         return totalMonthlyCost;
     }
+
+    @Override
+    public Optional<Customer> findById(UUID customerId) {
+        logger.info("[START] - createCustomer - CustomerJpaRepository");
+        var customer = customerSpringDataJPARepository.findById(customerId);
+        logger.info("[FINISH] - createCustomer - CustomerJpaRepository");
+        return customer;
+    }
+
+    @Override
+    public void update(Customer customer) {
+        logger.info("[START] - createCustomer - CustomerJpaRepository");
+        var createdCustomer = customerSpringDataJPARepository.saveAndFlush(customer);
+        logger.info("Customer {} updated", createdCustomer.getId());
+        logger.info("[FINISH] - createCustomer - CustomerJpaRepository");
+    }
 }

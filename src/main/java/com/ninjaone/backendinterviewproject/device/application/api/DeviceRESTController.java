@@ -17,15 +17,15 @@ import java.util.UUID;
 @SecurityRequirement(name = "openApiAuth")
 public class DeviceRESTController implements DeviceAPI {
 
-    private static final String DEVICE_CREATED_PATH = "ninjaone/app/v1/device/";
+    private static final String DEVICE_CREATED_PATH = "/app/v1/device/";
     private final Logger logger = LoggerFactory.getLogger(DeviceRESTController.class);
 
     private final DeviceService service;
 
     @Override
-    public ResponseEntity<DeviceDTO> getDeviceById(UUID deviceId, UUID customerId) {
+    public ResponseEntity<DeviceDTO> getDeviceById(UUID deviceId) {
         logger.info("[START] - DeviceRESTController - getDeviceById");
-        var returnedDevice = service.getDeviceById(deviceId, customerId);
+        var returnedDevice = service.getDeviceById(deviceId);
         logger.info("[FINISH] - DeviceRESTController - getDeviceById");
         return ResponseEntity.ok(new DeviceDTO(returnedDevice));
     }
@@ -33,7 +33,7 @@ public class DeviceRESTController implements DeviceAPI {
     @Override
     public ResponseEntity<DeviceDTO> createDevice(CreateDeviceForm createDeviceForm, UUID customerId, UriComponentsBuilder uriBuilder) {
         logger.info("[START] - DeviceRESTController - createDevice");
-        var createdDevice = service.createDevice(createDeviceForm.toEntity());
+        var createdDevice = service.createDevice(createDeviceForm.toEntity(), customerId);
         URI uri = uriBuilder.path(DEVICE_CREATED_PATH.concat(createdDevice.getId().toString()))
                 .buildAndExpand(createdDevice.getId()).toUri();
         logger.info("[FINISH] - DeviceRESTController - createDevice");
@@ -41,9 +41,9 @@ public class DeviceRESTController implements DeviceAPI {
     }
 
     @Override
-    public void updateDevice(DeviceForm deviceForm, UUID deviceId, UUID customerId) {
+    public void updateDevice(DeviceForm deviceForm, UUID deviceId) {
         logger.info("[START] - DeviceRESTController - updateDevice");
-        service.updateDevice(deviceForm.toEntity(), deviceId, customerId);
+        service.updateDevice(deviceForm.toEntity(), deviceId);
         logger.info("[FINISH] - DeviceRESTController - updateDevice");
     }
 
@@ -55,9 +55,9 @@ public class DeviceRESTController implements DeviceAPI {
     }
 
     @Override
-    public ResponseEntity<DeviceTotalMonthlyCostDTO> getTotalMonthlyCostById(UUID deviceId, UUID customerId) {
+    public ResponseEntity<DeviceTotalMonthlyCostDTO> getTotalMonthlyCostById(UUID deviceId) {
         logger.info("[START] - DeviceRESTController - getTotalMonthlyCostById");
-        var returnedDeviceTotalMonthlyCost = service.getDeviceTotalMonthlyCostById(deviceId, customerId);
+        var returnedDeviceTotalMonthlyCost = service.getDeviceTotalMonthlyCostById(deviceId);
         logger.info("[FINISH] - DeviceRESTController - getTotalMonthlyCostById");
         return ResponseEntity.ok(new DeviceTotalMonthlyCostDTO(returnedDeviceTotalMonthlyCost));
     }

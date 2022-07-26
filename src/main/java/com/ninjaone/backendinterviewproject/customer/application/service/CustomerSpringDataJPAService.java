@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -38,5 +39,20 @@ public class CustomerSpringDataJPAService implements CustomerService{
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.NOT_FOUND, "Customer not found"));
         logger.info("[FINISH] - CustomerSpringDataJPAService - getTotalMonthlyCost");
         return TotalMonthlyCost;
+    }
+
+    @Override
+    public Optional<Customer> getCustomerById(UUID customerId) {
+        logger.info("[START] - CustomerSpringDataJPAService - getCustomerById");
+        Optional<Customer> customer = customerRepository.findById(customerId);
+        logger.info("[FINISH] - CustomerSpringDataJPAService - getCustomerById");
+        return customer;
+    }
+
+    @Override
+    public void updateCustomer(Customer customer) {
+        logger.info("[START] - CustomerSpringDataJPAService - updateCustomer");
+        customerRepository.update(customer);
+        logger.info("[FINISH] - CustomerSpringDataJPAService - updateCustomer");
     }
 }

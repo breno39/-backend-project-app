@@ -26,14 +26,7 @@ public class DeviceJpaRepository implements DeviceRepository {
     }
 
     @Override
-    public void deleteDevice(UUID deviceId, UUID customerId) {
-        logger.info("[START] - DeviceJpaRepository - deleteDevice");
-        deviceRepository.deleteById(deviceId);
-        logger.info("[FINISH] - DeviceJpaRepository - deleteDevice");
-    }
-
-    @Override
-    public Optional<Device> findByIdAndCustomerId(UUID deviceId, UUID customerId) {
+    public Optional<Device> findById(UUID deviceId) {
         logger.info("[START] - DeviceJpaRepository - findByIdAndCustomerId");
         Optional<Device> returnedDevice = deviceRepository.findById(deviceId);
         logger.info("[FINISH] - DeviceJpaRepository - findByIdAndCustomerId");

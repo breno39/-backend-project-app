@@ -31,13 +31,13 @@ public class ServiceSpringDataJPAService implements ServiceService{
     }
 
     @Override
-    public com.ninjaone.backendinterviewproject.service.domain.Service addAvailableServiceToDevice(ServiceType type, UUID deviceId, UUID customerId) {
+    public com.ninjaone.backendinterviewproject.service.domain.Service addAvailableServiceToDevice(ServiceType type, UUID deviceId) {
         logger.info("[START] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
-        Device returnedDevice = deviceService.getDeviceById(deviceId, customerId);
+        Device returnedDevice = deviceService.getDeviceById(deviceId);
         if(returnedDevice.getServiceByServiceType(type).isEmpty()) {
             var newService = new com.ninjaone.backendinterviewproject.service.domain.Service(type);
             returnedDevice.addService(newService);
-            returnedDevice = deviceService.updateDevice(returnedDevice, deviceId, customerId);
+            returnedDevice = deviceService.updateDevice(returnedDevice, deviceId);
             logger.info("[FINISH] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
             return returnedDevice.getServiceByServiceType(type).get();
         } else {
@@ -46,13 +46,13 @@ public class ServiceSpringDataJPAService implements ServiceService{
     }
 
     @Override
-    public void removeAvailableServiceFromDevice(ServiceType type, UUID deviceId, UUID customerId) {
+    public void removeAvailableServiceFromDevice(ServiceType type, UUID deviceId) {
         logger.info("[START] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
-        Device returnedDevice = deviceService.getDeviceById(deviceId, customerId);
+        Device returnedDevice = deviceService.getDeviceById(deviceId);
         var returnedService = returnedDevice.getServiceByServiceType(type)
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service do not exists in Device"));
         returnedDevice.removeService(returnedService);
-        deviceService.updateDevice(returnedDevice, deviceId, customerId);
+        deviceService.updateDevice(returnedDevice, deviceId);
         logger.info("[FINISH] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
     }
 

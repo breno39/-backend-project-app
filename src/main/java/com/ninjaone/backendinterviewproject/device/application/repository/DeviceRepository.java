@@ -8,9 +8,7 @@ import java.util.UUID;
 public interface DeviceRepository {
     Device createDevice(Device device);
 
-    void deleteDevice(UUID deviceId, UUID customerId);
-
-    Optional<Device> findByIdAndCustomerId(UUID deviceId, UUID customerId);
+    Optional<Device> findById(UUID deviceId);
 
     Device updateDevice(Device device);
 }

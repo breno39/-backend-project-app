@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("customer/{customerId}/device/{deviceId}/service")
+@RequestMapping("private/v1/customer/device/{deviceId}/service")
 public interface ServiceAPI {
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
@@ -20,12 +20,11 @@ public interface ServiceAPI {
     @ResponseStatus(value = HttpStatus.CREATED)
     ResponseEntity<ServiceDTO> addAvailableServiceToDevice(@RequestBody @Valid ServiceForm serviceForm,
                                                            @NotEmpty @PathVariable("deviceId") UUID deviceId,
-                                                           @NotEmpty @PathVariable("customerId") UUID customerId,
                                                            UriComponentsBuilder uriBuilder);
 
     @DeleteMapping()
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    void removeAvailableServiceFromDevice(@RequestBody @Valid ServiceForm serviceForm,
-                                          @NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);
+    void removeAvailableServiceFromDevice(@RequestParam @Valid ServiceForm serviceForm,
+                                          @NotEmpty @PathVariable("deviceId") UUID deviceId);
 
 }
