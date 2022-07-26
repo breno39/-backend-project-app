@@ -48,7 +48,7 @@ public class DeviceSpringDataJPAService implements DeviceService {
     @Override
     public Device updateDevice(Device device, UUID deviceId) {
         logger.info("[START] - DeviceSpringDataJPAService - updateDevice");
-        Device returnedDevice = getDeviceByIdAndCustomerId(deviceId);
+        Device returnedDevice = getDeviceByIdOrThrow(deviceId);
         returnedDevice.setType(device.getType());
         returnedDevice.setSystemName(device.getSystemName());
         if(!device.getServices().isEmpty()) {
@@ -68,18 +68,17 @@ public class DeviceSpringDataJPAService implements DeviceService {
         customerService.updateCustomer(returnedCustomer);
         logger.info("[FINISH] - DeviceSpringDataJPAService - deleteDevice");
     }
-
-    //TODO: Refactore this! bring the property direct from repo instead of hole object
+    
     @Override
     public Long getDeviceTotalMonthlyCostById(UUID deviceId) {
         logger.info("[START] - DeviceSpringDataJPAService - getDeviceTotalMonthlyCostById");
-        Device returnedDevice = getDeviceByIdAndCustomerId(deviceId);
+        Long returnedTotalMonthlyCost = getTotalMonthlyCostById(deviceId);
         logger.info("[FINISH] - DeviceSpringDataJPAService - getDeviceTotalMonthlyCostById");
-        return returnedDevice.getTotalMonthlyCost();
+        return returnedTotalMonthlyCost;
     }
 
-    private Device getDeviceByIdAndCustomerId(UUID deviceId) {
-        return deviceRepository.findById(deviceId)
+    private Long getTotalMonthlyCostById(UUID deviceId) {
+        return deviceRepository.findTotalMonthlyCostById(deviceId)
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.NOT_FOUND, "Device not found"));
     }
 

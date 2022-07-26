@@ -10,25 +10,24 @@ import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("private/v1/customer/{customerId}/device")
 public interface DeviceAPI {
-    @GetMapping("/{deviceId}")
+    @GetMapping("private/v1/customer/device/{deviceId}")
     @ResponseStatus(value = HttpStatus.OK)
     ResponseEntity<DeviceDTO> getDeviceById(@NotEmpty @PathVariable("deviceId") UUID deviceId);
 
-    @PostMapping
+    @PostMapping("private/v1/customer/{customerId}/device")
     @ResponseStatus(value = HttpStatus.CREATED)
     ResponseEntity<DeviceDTO> createDevice(@RequestBody @Valid CreateDeviceForm createDeviceForm, @NotEmpty @PathVariable("customerId") UUID customerId, UriComponentsBuilder uriBuilder);
 
-    @PutMapping("/{deviceId}")
+    @PutMapping("private/v1/customer/device/{deviceId}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     void updateDevice(@RequestBody DeviceForm deviceForm, @NotEmpty @PathVariable("deviceId") UUID deviceId);
 
-    @DeleteMapping("/{deviceId}")
+    @DeleteMapping("private/v1/customer/{customerId}/device/{deviceId}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     void deleteDevice(@NotEmpty @PathVariable("deviceId") UUID deviceId, @NotEmpty @PathVariable("customerId") UUID customerId);
 
-    @GetMapping("/{deviceId}/cost")
+    @GetMapping("private/v1/customer/device/{deviceId}/cost")
     @ResponseStatus(value = HttpStatus.OK)
     ResponseEntity<DeviceTotalMonthlyCostDTO> getTotalMonthlyCostById(@NotEmpty @PathVariable("deviceId") UUID deviceId);
 

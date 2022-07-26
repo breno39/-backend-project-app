@@ -40,4 +40,12 @@ public class DeviceJpaRepository implements DeviceRepository {
         logger.info("[FINISH] - DeviceJpaRepository - updateDevice");
         return device;
     }
+
+    @Override
+    public Optional<Long> findTotalMonthlyCostById(UUID deviceId) {
+        logger.info("[START] - DeviceJpaRepository - findTotalMonthlyCostById");
+        Optional<Long> totalMonthlyCost = deviceRepository.getTotalMonthlyCostById(deviceId);
+        logger.info("[FINISH] - DeviceJpaRepository - findTotalMonthlyCostById");
+        return totalMonthlyCost;
+    }
 }

@@ -23,6 +23,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode()
+@NamedQuery(name = "Device.getTotalMonthlyCostById",
+        query = "SELECT d.totalMonthlyCost FROM Device d WHERE d.id = :deviceId"
+)
 public class Device {
     public static final Long DEVICE_COST = 4L;
 
