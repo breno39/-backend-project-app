@@ -1,0 +1,38 @@
+package com.ninjaone.backendinterviewproject.customer.infrastructure;
+
+import com.ninjaone.backendinterviewproject.customer.application.service.CustomerRepository;
+import com.ninjaone.backendinterviewproject.customer.domain.Customer;
+import com.ninjaone.backendinterviewproject.handler.ApiException;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
+import java.util.UUID;
+
+@Component
+@RequiredArgsConstructor
+public class CustomerJpaRepository implements CustomerRepository {
+    private Logger logger = LoggerFactory.getLogger(CustomerJpaRepository.class);
+
+    private final CustomerSpringDataJPARepository customerSpringDataJPARepository;
+
+    @Override
+    public Customer createCustomer(Customer customer) {
+        logger.info("[START] - createCustomer - CustomerJpaRepository");
+        var createdCustomer = customerSpringDataJPARepository.save(customer);
+        logger.info("Customer {} created", createdCustomer.getId());
+        logger.info("[FINISH] - createCustomer - CustomerJpaRepository");
+        return createdCustomer;
+    }
+
+    @Override
+    public Optional<Long> findTotalMonthlyCostById(UUID customerId) {
+        logger.info("[START] - createCustomer - CustomerJpaRepository");
+        var totalMonthlyCost = customerSpringDataJPARepository.getTotalMonthlyCostById(customerId);
+        logger.info("[FINISH] - createCustomer - CustomerJpaRepository");
+        return totalMonthlyCost;
+    }
+}

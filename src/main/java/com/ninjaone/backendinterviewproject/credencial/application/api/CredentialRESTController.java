@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequiredArgsConstructor
 public class CredentialRESTController implements CredentialAPI {
-	public static final String CREDENTIAL_CREATE_PATH = "/mec/app/public/v1/credential/{credentialId}";
+	public static final String CREDENTIAL_CREATE_PATH = "/app/admin/v1/credential/{credentialId}";
 
 	private final Logger logger = LoggerFactory.getLogger(CredentialRESTController.class);
 

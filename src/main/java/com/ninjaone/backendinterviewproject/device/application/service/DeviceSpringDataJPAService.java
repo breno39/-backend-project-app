@@ -60,6 +60,7 @@ public class DeviceSpringDataJPAService implements DeviceService {
         logger.info("[FINISH] - DeviceSpringDataJPAService - deleteDevice");
     }
 
+    //TODO: Refactore this! bring the property direct from repo instead of hole object
     @Override
     public Long getDeviceTotalMonthlyCostById(UUID deviceId, UUID customerId) {
         logger.info("[START] - DeviceSpringDataJPAService - getDeviceTotalMonthlyCostById");

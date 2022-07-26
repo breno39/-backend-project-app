@@ -1,5 +1,6 @@
 package com.ninjaone.backendinterviewproject.customer.domain;
 
+import com.ninjaone.backendinterviewproject.credencial.domain.Credential;
 import com.ninjaone.backendinterviewproject.device.domain.Device;
 import com.ninjaone.backendinterviewproject.service.domain.Service;
 import lombok.*;
@@ -19,6 +20,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode()
+@NamedQuery(name = "Customer.getTotalMonthlyCostById",
+        query = "SELECT c.totalMonthlyCost FROM Customer c WHERE c.id = :customerId"
+)
 public class Customer {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -41,6 +45,9 @@ public class Customer {
     @ElementCollection(targetClass= Device.class)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer", orphanRemoval = true)
     private Set<Device> devices = new HashSet<>();
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Credential credential;
 
     public void addDevice(Device device) {
         this.devices.add(device);

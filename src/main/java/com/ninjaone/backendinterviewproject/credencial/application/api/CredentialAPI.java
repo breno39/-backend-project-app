@@ -13,7 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 
 @RestController
-@RequestMapping("public/v1/credential")
+@RequestMapping("admin/v1/credential")
 public interface CredentialAPI {
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)

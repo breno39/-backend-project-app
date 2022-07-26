@@ -14,7 +14,12 @@ spring:
         enabled: true
         settings:
           web-allow-others: false
+
 app:
     jwt:
       expiration: 31
       key: HRlELXqpSB
+
+server:
+  servlet:
+    context-path: /app
