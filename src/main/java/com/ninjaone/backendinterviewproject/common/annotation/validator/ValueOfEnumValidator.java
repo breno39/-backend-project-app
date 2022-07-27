@@ -1,4 +1,4 @@
-package com.ninjaone.backendinterviewproject.common.validator;
+package com.ninjaone.backendinterviewproject.common.annotation.validator;
 
 import com.ninjaone.backendinterviewproject.common.annotation.MustBeInServiceType;
 import com.ninjaone.backendinterviewproject.service.domain.ServiceType;

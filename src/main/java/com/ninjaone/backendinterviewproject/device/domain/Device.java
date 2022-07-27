@@ -18,11 +18,12 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter()
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EqualsAndHashCode()
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NamedQuery(name = "Device.getTotalMonthlyCostById",
         query = "SELECT d.totalMonthlyCost FROM Device d WHERE d.id = :deviceId"
 )
@@ -32,6 +33,7 @@ public class Device {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @EqualsAndHashCode.Include
     private UUID id;
 
     @Setter
@@ -48,6 +50,7 @@ public class Device {
     private LocalDateTime updatedDate;
 
     @Column(unique = true)
+    @EqualsAndHashCode.Include
     private String systemName;
 
     @Enumerated(EnumType.STRING)
@@ -56,14 +59,17 @@ public class Device {
     @Builder.Default
     private Long totalMonthlyCost = DEVICE_COST;
 
+    @Setter(AccessLevel.NONE)
     @Builder.Default
-    @EqualsAndHashCode.Exclude
     @ElementCollection(targetClass=Service.class)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "device", orphanRemoval = true)
     private Set<Service> services = new HashSet<>();
 
     public void addService(Service service) {
-        checkServiceCompatibility(service.getType());
+        if(!isCompatible(service.getType())) {
+            return;
+        }
+
         this.services.add(service);
         service.setDevice(this);
         this.calculateTotalMonthlyCost();
@@ -73,17 +79,6 @@ public class Device {
         this.services.remove(service);
         service.setDevice(null);
         this.calculateTotalMonthlyCost();
-    }
-
-    public void setServices(Set<Service> services) {
-        this.services = services;
-        this.calculateTotalMonthlyCost();
-    }
-
-    private void checkServiceCompatibility(ServiceType type) {
-        if(!isCompatible(type)) {
-            throw ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service and Device are not compatible");
-        }
     }
 
     public boolean isCompatible(ServiceType type) {

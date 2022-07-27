@@ -5,6 +5,8 @@ import com.ninjaone.backendinterviewproject.customer.domain.Customer;
 import com.ninjaone.backendinterviewproject.device.application.repository.DeviceRepository;
 import com.ninjaone.backendinterviewproject.device.domain.Device;
 import com.ninjaone.backendinterviewproject.handler.ApiException;
+import com.ninjaone.backendinterviewproject.service.application.api.ServiceForm;
+import com.ninjaone.backendinterviewproject.service.domain.ServiceType;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,7 @@ public class DeviceSpringDataJPAService implements DeviceService {
     public Device createDevice(Device device, UUID customerId) {
         logger.info("[START] - DeviceSpringDataJPAService - createDevice");
         try {
+            checkDeviceCompatibility(device);
             Customer returnedCustomer = getCustomerById(customerId);
             Device createdDevice = deviceRepository.createDevice(device);
             returnedCustomer.addDevice(createdDevice);
@@ -51,9 +54,6 @@ public class DeviceSpringDataJPAService implements DeviceService {
         Device returnedDevice = getDeviceByIdOrThrow(deviceId);
         returnedDevice.setType(device.getType());
         returnedDevice.setSystemName(device.getSystemName());
-        if(!device.getServices().isEmpty()) {
-            returnedDevice.setServices(device.getServices());
-        }
         Device updatedDevice = deviceRepository.updateDevice(returnedDevice);
         logger.info("[FINISH] - DeviceSpringDataJPAService - updateDevice");
         return updatedDevice;
@@ -68,7 +68,7 @@ public class DeviceSpringDataJPAService implements DeviceService {
         customerService.updateCustomer(returnedCustomer);
         logger.info("[FINISH] - DeviceSpringDataJPAService - deleteDevice");
     }
-    
+
     @Override
     public Long getDeviceTotalMonthlyCostById(UUID deviceId) {
         logger.info("[START] - DeviceSpringDataJPAService - getDeviceTotalMonthlyCostById");
@@ -92,5 +92,13 @@ public class DeviceSpringDataJPAService implements DeviceService {
     private Device getDeviceByIdOrThrow(UUID deviceId) {
         return deviceRepository.findById(deviceId)
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.NOT_FOUND, "device not found"));
+    }
+
+    private void checkDeviceCompatibility(Device device) {
+        for(com.ninjaone.backendinterviewproject.service.domain.Service service : device.getServices()) {
+            if(!device.isCompatible(service.getType())) {
+                throw ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service and Device are not compatible");
+            }
+        }
     }
 }

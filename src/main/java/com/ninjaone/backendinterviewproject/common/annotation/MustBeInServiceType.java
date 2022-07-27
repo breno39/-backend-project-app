@@ -1,6 +1,6 @@
 package com.ninjaone.backendinterviewproject.common.annotation;
 
-import com.ninjaone.backendinterviewproject.common.validator.ValueOfEnumValidator;
+import com.ninjaone.backendinterviewproject.common.annotation.validator.ValueOfEnumValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

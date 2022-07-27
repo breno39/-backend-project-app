@@ -14,11 +14,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+@Getter
 @Entity
-@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @EqualsAndHashCode()
 @NamedQuery(name = "Customer.getTotalMonthlyCostById",
         query = "SELECT c.totalMonthlyCost FROM Customer c WHERE c.id = :customerId"
@@ -27,6 +27,7 @@ public class Customer {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @EqualsAndHashCode.Include
     private UUID id;
 
     @Column(name = "created_date", nullable = false, updatable = false)

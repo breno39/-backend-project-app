@@ -1,4 +1,4 @@
-package com.ninjaone.backendinterviewproject.service;
+package com.ninjaone.backendinterviewproject.sample;
 
 import com.ninjaone.backendinterviewproject.sample.database.SampleRepository;
 import com.ninjaone.backendinterviewproject.sample.model.Sample;

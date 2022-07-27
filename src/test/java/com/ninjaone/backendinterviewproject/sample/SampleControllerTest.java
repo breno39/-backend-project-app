@@ -1,4 +1,4 @@
-package com.ninjaone.backendinterviewproject.controller;
+package com.ninjaone.backendinterviewproject.sample;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ninjaone.backendinterviewproject.BackendInterviewProjectApplication;

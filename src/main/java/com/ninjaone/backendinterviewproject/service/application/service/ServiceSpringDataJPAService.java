@@ -36,6 +36,7 @@ public class ServiceSpringDataJPAService implements ServiceService{
         Device returnedDevice = deviceService.getDeviceById(deviceId);
         if(returnedDevice.getServiceByServiceType(type).isEmpty()) {
             var newService = new com.ninjaone.backendinterviewproject.service.domain.Service(type);
+            checkServiceCompatibility(returnedDevice, type);
             returnedDevice.addService(newService);
             returnedDevice = deviceService.updateDevice(returnedDevice, deviceId);
             logger.info("[FINISH] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
@@ -56,5 +57,10 @@ public class ServiceSpringDataJPAService implements ServiceService{
         logger.info("[FINISH] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
     }
 
+    private void checkServiceCompatibility(Device device, ServiceType type) {
+        if(!device.isCompatible(type)) {
+            throw ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service and Device are not compatible");
+        }
+    }
 
 }

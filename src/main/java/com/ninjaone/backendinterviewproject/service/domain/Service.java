@@ -16,10 +16,12 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Service {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @EqualsAndHashCode.Include
     private UUID id;
 
     @Setter
@@ -39,24 +41,12 @@ public class Service {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = false)
+    @EqualsAndHashCode.Include
     private ServiceType type;
 
     public Service(ServiceType type) {
         this.type = type;
         this.MonthlyCost = type.getCost();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Service service = (Service) o;
-        return id.equals(service.getId()) && type==service.type;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, type);
     }
 
     public boolean isType(ServiceType type) {

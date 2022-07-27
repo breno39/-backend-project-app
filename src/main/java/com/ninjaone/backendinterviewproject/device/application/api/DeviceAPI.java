@@ -17,7 +17,7 @@ public interface DeviceAPI {
 
     @PostMapping("private/v1/customer/{customerId}/device")
     @ResponseStatus(value = HttpStatus.CREATED)
-    ResponseEntity<DeviceDTO> createDevice(@RequestBody @Valid CreateDeviceForm createDeviceForm, @NotEmpty @PathVariable("customerId") UUID customerId, UriComponentsBuilder uriBuilder);
+    ResponseEntity<DeviceDTO> createDevice(@RequestBody @Valid DeviceForm createDeviceForm, @NotEmpty @PathVariable("customerId") UUID customerId, UriComponentsBuilder uriBuilder);
 
     @PutMapping("private/v1/customer/device/{deviceId}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)

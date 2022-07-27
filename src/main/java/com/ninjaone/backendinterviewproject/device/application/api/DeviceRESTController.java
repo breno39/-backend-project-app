@@ -31,11 +31,14 @@ public class DeviceRESTController implements DeviceAPI {
     }
 
     @Override
-    public ResponseEntity<DeviceDTO> createDevice(CreateDeviceForm createDeviceForm, UUID customerId, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DeviceDTO> createDevice(DeviceForm createDeviceForm,
+                                                  UUID customerId,
+                                                  UriComponentsBuilder uriBuilder) {
         logger.info("[START] - DeviceRESTController - createDevice");
         var createdDevice = service.createDevice(createDeviceForm.toEntity(), customerId);
         URI uri = uriBuilder.path(DEVICE_CREATED_PATH.concat(createdDevice.getId().toString()))
                 .buildAndExpand(createdDevice.getId()).toUri();
+        logger.info("Device {} created", createdDevice.getId());
         logger.info("[FINISH] - DeviceRESTController - createDevice");
         return ResponseEntity.created(uri).body(new DeviceDTO(createdDevice));
     }
