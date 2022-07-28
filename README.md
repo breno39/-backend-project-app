@@ -1,41 +1,32 @@
 # NinjaOne Backend Interview Project
 
-The project is configured to use an in-memory H2 database that is volatile. If you wish to make it maintain data on application shut down, you can change the spring.database.jdbc-url to point at a file like `jdbc:h2:file:/{your file path here}`
-
+The project is configured to use an in-memory H2 database that is volatile. This API contains all the main features' 
+described in the given documentation for the test.
 ## Starting the Application
 
-Run the `BackendInterviewProjectApplication` class
+Run the `BackendInterviewProjectApplication` class with the `prod` or build the app with `gradle build` and then execute
+the docker-compose on the project's root directory, after that the endpoints can be better visualized at the Swagger main
+page, the application is configured to use port 8080
 
-Go to:
-* http://localhost:8080/sample/1
-* http://localhost:8080/sample/2
+* [Swagger Link](http://localhost:8080/app/swagger-ui/index.html)
 
-You should see results for both of these. The application is working and connected to the H2 database. 
+You should see results after running the app.
 
-## H2 Console 
+## Using the API 
 
-In order to see and interact with your db, access the h2 console in your browser.
-After running the application, go to:
-
-http://localhost:8080/h2-console
-
-Enter the information for the url, username, and password in the application.yml:
-
-```yml
-url: jdbc:h2:mem:localdb
-username: sa 
-password: password
+In order to use the application you must first authenticate yourself, this can be done via the default Credential witch is
+already in the project, just use the following Credentials:
+```json
+{
+  "username": "user",
+  "password": "string"
+}
 ```
 
-You should be able to see a db console now that has the Sample Repository in it.
+Just input those credentials at the `/authenticate` endpoint in Authentication API Tag and store the received token, 
+public routes don't need authentication, but with private end-point authentication is mandatory.
 
-Type:
-
-```sql
-SELECT * FROM SAMPLE;
-````
-
-Click `Run`, you should see two rows, for ids `1` and `2`
+After that you can freely use the API.
 
 ### Suggestions
 

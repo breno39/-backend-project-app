@@ -4,6 +4,8 @@ import java.net.URI;
 
 import com.ninjaone.backendinterviewproject.credencial.application.service.CredentialService;
 import com.ninjaone.backendinterviewproject.credencial.domain.Credential;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Credential API", description = "Contains the CRUD of the Credential domain")
 public class CredentialRESTController implements CredentialAPI {
 	public static final String CREDENTIAL_CREATE_PATH = "/app/admin/v1/credential/{credentialId}";
 
@@ -21,6 +24,7 @@ public class CredentialRESTController implements CredentialAPI {
 	private final CredentialService credentialService;
 
 	@Override
+	@Operation(operationId = "createCredential", description = "End-point used create a credential which are used to authenticate into the app", summary = "Create new credential")
 	public ResponseEntity<CredentialDTO> createCredential(CredentialForm credentialForm,
 														  UriComponentsBuilder uriBuilder) {
 		logger.info("[START] CredentialRESTController - createCredential");

@@ -5,6 +5,8 @@ import com.ninjaone.backendinterviewproject.authentication.application.TokenDTO;
 import com.ninjaone.backendinterviewproject.authentication.application.service.AuthenticationService;
 import com.ninjaone.backendinterviewproject.authentication.util.ValidateAuthorizationHeader;
 import com.ninjaone.backendinterviewproject.handler.ApiException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -17,11 +19,13 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @Log4j2
+@Tag(name = "Authentication API", description = "Authentication Information and manipulation")
 public class AuthenticationRESTController implements AuthenticationAPI {
 
     private AuthenticationService authenticationService;
 
     @Override
+    @Operation(operationId = "Authenticate", description = "End-point used authenticate into the app, you will receive a token which is valid for 30 minutes", summary = "authenticate into the app")
     public ResponseEntity<TokenDTO> Authenticate(AuthenticationForm authenticationForm) {
         log.info("[START] AuthenticationRESTController - Authenticate");
         var token = authenticationService.authenticate(authenticationForm.converter());
@@ -30,6 +34,7 @@ public class AuthenticationRESTController implements AuthenticationAPI {
     }
 
     @Override
+    @Operation(operationId = "refreshAuthentication", description = "End-point used authenticate refresh the token ", summary = "refresh token")
     public ResponseEntity<TokenDTO> refreshAuthentication(String expiredToken) throws AuthenticationException {
         log.info("[START] AuthenticationRESTController - refreshAuthentication");
         String tokenExpiradoValido= validateExpiredToken(Optional.of(expiredToken));

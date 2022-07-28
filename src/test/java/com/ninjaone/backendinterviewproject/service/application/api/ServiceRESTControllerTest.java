@@ -1,21 +1,14 @@
 package com.ninjaone.backendinterviewproject.service.application.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ninjaone.backendinterviewproject.BackendInterviewProjectApplication;
-import com.ninjaone.backendinterviewproject.config.security.service.TokenService;
-import com.ninjaone.backendinterviewproject.sample.service.SampleService;
 import com.ninjaone.backendinterviewproject.service.application.service.ServiceService;
-import com.ninjaone.backendinterviewproject.service.domain.Service;
 import com.ninjaone.backendinterviewproject.service.domain.ServiceType;
-import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
