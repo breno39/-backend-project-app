@@ -36,7 +36,6 @@ public class DeviceSpringDataJPAService implements DeviceService {
     public Device createDevice(Device device, UUID customerId) {
         logger.info("[START] - DeviceSpringDataJPAService - createDevice");
         try {
-            checkDeviceCompatibility(device);
             Customer returnedCustomer = getCustomerById(customerId);
             Device createdDevice = deviceRepository.createDevice(device);
             returnedCustomer.addDevice(createdDevice);
@@ -86,22 +85,13 @@ public class DeviceSpringDataJPAService implements DeviceService {
     }
 
     private Customer getCustomerById(UUID customerId) {
-        Customer returnedCustomer = customerService.getCustomerById(customerId)
+        return customerService.getCustomerById(customerId)
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.NOT_FOUND, "customer not found"));
-        return returnedCustomer;
     }
 
 
     private Device getDeviceByIdOrThrow(UUID deviceId) {
         return deviceRepository.findById(deviceId)
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.NOT_FOUND, "device not found"));
-    }
-
-    private void checkDeviceCompatibility(Device device) {
-        for(com.ninjaone.backendinterviewproject.service.domain.Service service : device.getServices()) {
-            if(!device.isCompatible(service.getType())) {
-                throw ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service and Device are not compatible");
-            }
-        }
     }
 }
