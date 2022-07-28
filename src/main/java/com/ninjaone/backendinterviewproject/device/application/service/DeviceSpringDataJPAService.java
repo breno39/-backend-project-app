@@ -85,10 +85,8 @@ public class DeviceSpringDataJPAService implements DeviceService {
     }
 
     private Customer getCustomerById(UUID customerId) {
-        return customerService.getCustomerById(customerId)
-                .orElseThrow(() -> ApiException.throwApiException(HttpStatus.NOT_FOUND, "customer not found"));
+        return customerService.getCustomerById(customerId);
     }
-
 
     private Device getDeviceByIdOrThrow(UUID deviceId) {
         return deviceRepository.findById(deviceId)

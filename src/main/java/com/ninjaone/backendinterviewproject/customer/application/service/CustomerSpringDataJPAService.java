@@ -26,6 +26,7 @@ public class CustomerSpringDataJPAService implements CustomerService{
         customer.getCredential().encryptPassword();
         try {
             var createdCustomer = customerRepository.createCustomer(customer);
+            logger.info("created Customer {}", createdCustomer.getId());
             logger.info("[FINISH] - CustomerSpringDataJPAService - createCustomer");
             return createdCustomer;
         } catch (DataIntegrityViolationException ex) {
@@ -43,17 +44,19 @@ public class CustomerSpringDataJPAService implements CustomerService{
     }
 
     @Override
-    public Optional<Customer> getCustomerById(UUID customerId) {
+    public Customer getCustomerById(UUID customerId) {
         logger.info("[START] - CustomerSpringDataJPAService - getCustomerById");
         Optional<Customer> customer = customerRepository.findById(customerId);
+        logger.info("found Customer {}", customerId);
         logger.info("[FINISH] - CustomerSpringDataJPAService - getCustomerById");
-        return customer;
+        return customer.orElseThrow(() -> ApiException.throwApiException(HttpStatus.NOT_FOUND, "customer not found"));
     }
 
     @Override
     public void updateCustomer(Customer customer) {
         logger.info("[START] - CustomerSpringDataJPAService - updateCustomer");
         customerRepository.update(customer);
+        logger.info("updated Customer {}", customer.getId());
         logger.info("[FINISH] - CustomerSpringDataJPAService - updateCustomer");
     }
 }

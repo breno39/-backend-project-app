@@ -57,7 +57,6 @@ class ServiceSpringDataJPAServiceTest {
         device.addService(existingService);
 
         Mockito.when(deviceService.getDeviceById(DEVICE_ID)).thenReturn(device);
-        //Mockito.when(deviceService.updateDevice(device, DEVICE_ID)).thenReturn(device);
 
         Assertions.assertThrows(ApiException.class,
                 () -> serviceSpringDataJPAService.addAvailableServiceToDevice(type, device.getId()));

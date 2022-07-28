@@ -60,7 +60,7 @@ class DeviceSpringDataJPAServiceTest {
         var customer = Customer.builder().id(CUSTOMER_ID).build();
 
         when(deviceRepository.createDevice(device)).thenReturn(device);
-        when(customerService.getCustomerById(CUSTOMER_ID)).thenReturn(Optional.ofNullable(customer));
+        when(customerService.getCustomerById(CUSTOMER_ID)).thenReturn(customer);
         doNothing().when(customerService).updateCustomer(customer);
 
         var returnedDevice = deviceSpringDataJPAService.createDevice(device, CUSTOMER_ID);
@@ -75,7 +75,7 @@ class DeviceSpringDataJPAServiceTest {
         var customer = Customer.builder().id(CUSTOMER_ID).build();
 
         when(deviceRepository.createDevice(device)).thenThrow(ApiException.throwApiException(HttpStatus.BAD_REQUEST, ""));
-        when(customerService.getCustomerById(CUSTOMER_ID)).thenReturn(Optional.ofNullable(customer));
+        when(customerService.getCustomerById(CUSTOMER_ID)).thenReturn(customer);
 
         Assertions.assertThrows(ApiException.class, () -> deviceSpringDataJPAService.createDevice(device, CUSTOMER_ID));
 
@@ -132,7 +132,7 @@ class DeviceSpringDataJPAServiceTest {
         customer.addDevice(device);
 
         when(deviceRepository.findById(DEVICE_ID)).thenReturn(Optional.of(device));
-        when(customerService.getCustomerById(CUSTOMER_ID)).thenReturn(Optional.ofNullable(customer));
+        when(customerService.getCustomerById(CUSTOMER_ID)).thenReturn(customer);
         doNothing().when(customerService).updateCustomer(customer);
 
         deviceSpringDataJPAService.deleteDevice(DEVICE_ID, CUSTOMER_ID);

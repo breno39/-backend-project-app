@@ -13,7 +13,7 @@ public interface CustomerService {
 
     Long getTotalMonthlyCost(UUID customerId);
 
-    Optional<Customer> getCustomerById(UUID customerId);
+    Customer getCustomerById(UUID customerId);
 
     void updateCustomer(Customer customer);
 }
