@@ -2,9 +2,7 @@ package com.ninjaone.backendinterviewproject.device.application.api;
 
 import com.ninjaone.backendinterviewproject.device.application.service.DeviceService;
 import com.ninjaone.backendinterviewproject.device.domain.Device;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

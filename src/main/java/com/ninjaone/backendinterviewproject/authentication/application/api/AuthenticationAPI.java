@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @RequestMapping("/public/v1/authenticate")
 public interface AuthenticationAPI {
     @PostMapping
-    ResponseEntity<TokenDTO> Authenticate(@RequestBody @Valid AuthenticationForm authenticationForm) throws AuthenticationException;
+    ResponseEntity<TokenDTO> authenticate(@RequestBody @Valid AuthenticationForm authenticationForm) throws AuthenticationException;
     @PostMapping("/refresh")
     ResponseEntity<TokenDTO> refreshAuthentication(@RequestHeader("Authorization") String expiredToken) throws AuthenticationException;
 }

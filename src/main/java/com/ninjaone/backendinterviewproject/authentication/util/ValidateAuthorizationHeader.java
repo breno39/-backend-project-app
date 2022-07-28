@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 public class ValidateAuthorizationHeader implements Predicate<String> {
     @Override
-    public boolean test(String AuthorizationHeaderBody) {
-        return !AuthorizationHeaderBody.isEmpty() && AuthorizationHeaderBody.startsWith("Bearer");
+    public boolean test(String authorizationHeaderBody) {
+        return !authorizationHeaderBody.isEmpty() && authorizationHeaderBody.startsWith("Bearer");
     }
 }

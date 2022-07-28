@@ -14,11 +14,11 @@ import java.util.UUID;
 public class ServiceDTO {
     private UUID id;
     private ServiceType type;
-    private Long MonthlyCost;
+    private Long monthlyCost;
 
     public ServiceDTO(Service createdService) {
         id = createdService.getId();
         type = createdService.getType();
-        MonthlyCost = createdService.getMonthlyCost();
+        monthlyCost = createdService.getMonthlyCost();
     }
 }

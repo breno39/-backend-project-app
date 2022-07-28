@@ -8,7 +8,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -38,7 +37,7 @@ public class Service {
     @UpdateTimestamp
     private LocalDateTime updatedDate;
 
-    private Long MonthlyCost;
+    private Long monthlyCost;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = false)
@@ -47,7 +46,7 @@ public class Service {
 
     public Service(ServiceType type) {
         this.type = type;
-        this.MonthlyCost = type.getCost();
+        this.monthlyCost = type.getCost();
     }
 
     public boolean isType(ServiceType type) {

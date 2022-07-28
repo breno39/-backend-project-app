@@ -26,7 +26,7 @@ public class AuthenticationRESTController implements AuthenticationAPI {
 
     @Override
     @Operation(operationId = "Authenticate", description = "End-point used authenticate into the app, you will receive a token which is valid for 30 minutes", summary = "authenticate into the app")
-    public ResponseEntity<TokenDTO> Authenticate(AuthenticationForm authenticationForm) {
+    public ResponseEntity<TokenDTO> authenticate(AuthenticationForm authenticationForm) {
         log.info("[START] AuthenticationRESTController - Authenticate");
         var token = authenticationService.authenticate(authenticationForm.converter());
         log.info("[FINISH] AuthenticationRESTController - Authenticate");

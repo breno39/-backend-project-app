@@ -5,8 +5,6 @@ import com.ninjaone.backendinterviewproject.customer.domain.Customer;
 import com.ninjaone.backendinterviewproject.device.application.repository.DeviceRepository;
 import com.ninjaone.backendinterviewproject.device.domain.Device;
 import com.ninjaone.backendinterviewproject.handler.ApiException;
-import com.ninjaone.backendinterviewproject.service.application.api.ServiceForm;
-import com.ninjaone.backendinterviewproject.service.domain.ServiceType;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

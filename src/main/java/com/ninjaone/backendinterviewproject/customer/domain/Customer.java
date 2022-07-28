@@ -2,7 +2,6 @@ package com.ninjaone.backendinterviewproject.customer.domain;
 
 import com.ninjaone.backendinterviewproject.credencial.domain.Credential;
 import com.ninjaone.backendinterviewproject.device.domain.Device;
-import com.ninjaone.backendinterviewproject.service.domain.Service;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;

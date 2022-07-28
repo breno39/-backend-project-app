@@ -2,6 +2,7 @@ package com.ninjaone.backendinterviewproject.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -24,6 +25,17 @@ public class RestResponseEntityExceptionHandler {
 				.body(ErrorApiDTO.builder()
 						.description("INTERNAL SERVER ERROR!")
 						.message("PLEASE INFORM THE SYSTEM ADMINISTRATOR.")
+						.build());
+	}
+
+	@ExceptionHandler(BadCredentialsException.class)
+	public ResponseEntity<ErrorApiDTO> handleApiException(BadCredentialsException ex) {
+		log.error("Security Exception", ex);
+		return ResponseEntity
+				.status(HttpStatus.BAD_REQUEST)
+				.body(ErrorApiDTO.builder()
+						.description("Credential Error")
+						.message("invalid username or password")
 						.build());
 	}
 

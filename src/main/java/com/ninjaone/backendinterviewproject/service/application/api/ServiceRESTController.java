@@ -2,23 +2,17 @@ package com.ninjaone.backendinterviewproject.service.application.api;
 
 import com.ninjaone.backendinterviewproject.service.application.service.ServiceService;
 import com.ninjaone.backendinterviewproject.service.domain.Service;
-import com.ninjaone.backendinterviewproject.service.domain.ServiceType;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springdoc.core.annotations.RouterOperation;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Set;
 import java.util.UUID;
 
 @RestController

@@ -1,14 +1,12 @@
 package com.ninjaone.backendinterviewproject.device.domain;
 
 import com.ninjaone.backendinterviewproject.customer.domain.Customer;
-import com.ninjaone.backendinterviewproject.handler.ApiException;
 import com.ninjaone.backendinterviewproject.service.domain.Service;
 import com.ninjaone.backendinterviewproject.service.domain.ServiceType;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.http.HttpStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -1,9 +1,7 @@
 package com.ninjaone.backendinterviewproject.customer.application.api;
 
 import com.ninjaone.backendinterviewproject.customer.application.service.CustomerService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

@@ -37,10 +37,10 @@ public class CustomerSpringDataJPAService implements CustomerService{
     @Override
     public Long getTotalMonthlyCost(UUID customerId) {
         logger.info("[START] - CustomerSpringDataJPAService - getTotalMonthlyCost");
-        Long TotalMonthlyCost = customerRepository.findTotalMonthlyCostById(customerId)
+        Long totalMonthlyCost = customerRepository.findTotalMonthlyCostById(customerId)
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.NOT_FOUND, "Customer not found"));
         logger.info("[FINISH] - CustomerSpringDataJPAService - getTotalMonthlyCost");
-        return TotalMonthlyCost;
+        return totalMonthlyCost;
     }
 
     @Override

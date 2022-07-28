@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeviceTotalMonthlyCostDTO {
-    private Long TotalMonthlyCost;
+    private Long totalMonthlyCost;
 }

@@ -19,26 +19,26 @@ public class CustomerJpaRepository implements CustomerRepository {
 
     @Override
     public Customer createCustomer(Customer customer) {
-        logger.info("[START] - createCustomer - CustomerJpaRepository");
+        logger.info("[START] - CustomerJpaRepository - createCustomer");
         var createdCustomer = customerSpringDataJPARepository.save(customer);
         logger.info("Customer {} created", createdCustomer.getId());
-        logger.info("[FINISH] - createCustomer - CustomerJpaRepository");
+        logger.info("[FINISH] - CustomerJpaRepository - createCustomer");
         return createdCustomer;
     }
 
     @Override
     public Optional<Long> findTotalMonthlyCostById(UUID customerId) {
-        logger.info("[START] - createCustomer - CustomerJpaRepository");
+        logger.info("[START] - CustomerJpaRepository - findTotalMonthlyCostById");
         var totalMonthlyCost = customerSpringDataJPARepository.getTotalMonthlyCostById(customerId);
-        logger.info("[FINISH] - createCustomer - CustomerJpaRepository");
+        logger.info("[FINISH] - CustomerJpaRepository - findTotalMonthlyCostById");
         return totalMonthlyCost;
     }
 
     @Override
     public Optional<Customer> findById(UUID customerId) {
-        logger.info("[START] - createCustomer - CustomerJpaRepository");
+        logger.info("[START] - CustomerJpaRepository - findById");
         var customer = customerSpringDataJPARepository.findById(customerId);
-        logger.info("[FINISH] - createCustomer - CustomerJpaRepository");
+        logger.info("[FINISH] - CustomerJpaRepository - findById");
         return customer;
     }
 

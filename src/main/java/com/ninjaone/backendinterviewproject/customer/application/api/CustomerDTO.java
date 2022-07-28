@@ -1,7 +1,6 @@
 package com.ninjaone.backendinterviewproject.customer.application.api;
 
 import com.ninjaone.backendinterviewproject.customer.domain.Customer;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

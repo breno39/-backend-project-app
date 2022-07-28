@@ -52,11 +52,11 @@ public class TokenFilter extends OncePerRequestFilter {
 
     private String retrieveToken(HttpServletRequest requestOpt) {
         log.info("[START] TokenFilter - retrieveToken");
-        var AuthorizationHeaderValueOpt = Optional.ofNullable(retrieveAuthorizationHeader(requestOpt));
-        String AuthorizationHeaderValue = AuthorizationHeaderValueOpt.filter(new ValidateAuthorizationHeader())
+        var authorizationHeaderValueOpt = Optional.ofNullable(retrieveAuthorizationHeader(requestOpt));
+        String authorizationHeaderValue = authorizationHeaderValueOpt.filter(new ValidateAuthorizationHeader())
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.UNAUTHORIZED, "invalid token"));
         log.info("[FINISH] TokenFilter - retrieveToken");
-        return AuthorizationHeaderValue.substring(7, AuthorizationHeaderValue.length());
+        return authorizationHeaderValue.substring(7, authorizationHeaderValue.length());
     }
 
     private String retrieveAuthorizationHeader(HttpServletRequest request) {
