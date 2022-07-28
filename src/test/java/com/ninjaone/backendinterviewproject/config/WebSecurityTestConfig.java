@@ -26,9 +26,9 @@ public class WebSecurityTestConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/private/**")
+                .antMatchers("**/private/**")
                 .authenticated()
-                .antMatchers("/public/**")
+                .antMatchers("**/public/**")
                 .permitAll()
                 .and()
                 .csrf()

@@ -18,7 +18,7 @@ import java.util.UUID;
 public class DeviceRESTController implements DeviceAPI {
 
     private static final String DEVICE_CREATED_PATH = "/app/v1/device/";
-    private final Logger logger = LoggerFactory.getLogger(DeviceRESTController.class);
+    private Logger logger = LoggerFactory.getLogger(DeviceRESTController.class);
 
     private final DeviceService service;
 

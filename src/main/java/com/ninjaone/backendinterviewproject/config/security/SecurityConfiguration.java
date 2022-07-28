@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @AllArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Profile(value = {"dev", "prod"})
+@Profile(value = {"dev", "prod", "default"})
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private TokenService tokenService;

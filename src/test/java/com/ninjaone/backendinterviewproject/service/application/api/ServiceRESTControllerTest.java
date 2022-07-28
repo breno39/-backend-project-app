@@ -17,12 +17,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -43,6 +40,7 @@ class ServiceRESTControllerTest {
     public static final String DEVICE_ID = UUID.randomUUID().toString();
     public static final String PRIVATE_SERVICE_PATH = new StringBuilder("/private/v1/customer/device/")
             .append(DEVICE_ID).append("/service").toString();
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -51,9 +49,6 @@ class ServiceRESTControllerTest {
 
     @MockBean
     private ServiceService serviceService;
-
-    @MockBean
-    private TokenService tokenService;
 
     @Test
     void getAvailableServices() throws Exception {
