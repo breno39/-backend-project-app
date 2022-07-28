@@ -1,5 +1,6 @@
 package com.ninjaone.backendinterviewproject.customer.application.service;
 
+import com.ninjaone.backendinterviewproject.customer.application.repository.CustomerRepository;
 import com.ninjaone.backendinterviewproject.customer.domain.Customer;
 import com.ninjaone.backendinterviewproject.handler.ApiException;
 import lombok.RequiredArgsConstructor;

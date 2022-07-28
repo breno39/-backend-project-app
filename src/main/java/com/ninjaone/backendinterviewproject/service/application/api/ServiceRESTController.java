@@ -26,9 +26,9 @@ public class ServiceRESTController implements ServiceAPI{
     @Override
     public ResponseEntity<Object> getAvailableServices() {
         logger.info("[START] - ServiceRESTController - getAvailableServices");
-        Set<ServiceType> serviceSet = service.getAvailableServices();
+        var services = service.getAvailableServices();
         logger.info("[FINISH] - ServiceRESTController - getAvailableServices");
-        return ResponseEntity.ok(serviceSet);
+        return ResponseEntity.ok(services);
     }
 
     @Override

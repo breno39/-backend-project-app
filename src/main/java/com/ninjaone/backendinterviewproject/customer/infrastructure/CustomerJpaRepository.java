@@ -1,12 +1,10 @@
 package com.ninjaone.backendinterviewproject.customer.infrastructure;
 
-import com.ninjaone.backendinterviewproject.customer.application.service.CustomerRepository;
+import com.ninjaone.backendinterviewproject.customer.application.repository.CustomerRepository;
 import com.ninjaone.backendinterviewproject.customer.domain.Customer;
-import com.ninjaone.backendinterviewproject.handler.ApiException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

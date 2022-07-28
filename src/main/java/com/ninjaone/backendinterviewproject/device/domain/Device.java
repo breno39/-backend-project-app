@@ -59,7 +59,6 @@ public class Device {
     @Builder.Default
     private Long totalMonthlyCost = DEVICE_COST;
 
-    @Setter(AccessLevel.NONE)
     @Builder.Default
     @ElementCollection(targetClass=Service.class)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "device", orphanRemoval = true)
@@ -93,5 +92,10 @@ public class Device {
         totalMonthlyCost = services.stream()
                 .map(Service::getMonthlyCost)
                 .reduce(DEVICE_COST, Long::sum);
+    }
+
+    public void setServices(Set<Service> services) {
+        this.services = services;
+        this.calculateTotalMonthlyCost();
     }
 }

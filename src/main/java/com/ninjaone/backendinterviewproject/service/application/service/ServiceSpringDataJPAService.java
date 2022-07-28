@@ -10,10 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,11 +20,11 @@ public class ServiceSpringDataJPAService implements ServiceService{
     private final DeviceService deviceService;
 
     @Override
-    public Set<ServiceType> getAvailableServices() {
+    public ServiceType[] getAvailableServices() {
         logger.info("[START] - ServiceSpringDataJPAService - getAvailableServices");
-        var availableServiceTypes = Arrays.stream(ServiceType.values());
+        var availableServiceTypes = ServiceType.values();
         logger.info("[FINISH] - ServiceSpringDataJPAService - getAvailableServices");
-        return availableServiceTypes.collect(Collectors.toSet());
+        return availableServiceTypes;
     }
 
     @Override
@@ -37,6 +34,7 @@ public class ServiceSpringDataJPAService implements ServiceService{
         if(returnedDevice.getServiceByServiceType(type).isEmpty()) {
             var newService = new com.ninjaone.backendinterviewproject.service.domain.Service(type);
             checkServiceCompatibility(returnedDevice, type);
+            logger.info("adding service of type {} to Device {}", type, deviceId);
             returnedDevice.addService(newService);
             returnedDevice = deviceService.updateDevice(returnedDevice, deviceId);
             logger.info("[FINISH] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
@@ -54,6 +52,7 @@ public class ServiceSpringDataJPAService implements ServiceService{
                 .orElseThrow(() -> ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service do not exists in Device"));
         returnedDevice.removeService(returnedService);
         deviceService.updateDevice(returnedDevice, deviceId);
+        logger.info("removed service of type {} of Device {}", type, deviceId);
         logger.info("[FINISH] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
     }
 

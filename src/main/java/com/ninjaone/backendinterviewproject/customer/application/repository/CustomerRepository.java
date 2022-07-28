@@ -1,4 +1,4 @@
-package com.ninjaone.backendinterviewproject.customer.application.service;
+package com.ninjaone.backendinterviewproject.customer.application.repository;
 
 import com.ninjaone.backendinterviewproject.customer.domain.Customer;
 
