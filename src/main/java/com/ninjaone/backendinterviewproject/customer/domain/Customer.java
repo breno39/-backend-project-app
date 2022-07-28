@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Getter
+@Setter
 @Entity
 @Builder
 @AllArgsConstructor

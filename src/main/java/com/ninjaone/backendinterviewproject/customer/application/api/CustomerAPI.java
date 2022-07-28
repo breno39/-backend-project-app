@@ -16,7 +16,7 @@ public interface CustomerAPI {
     ResponseEntity<CustomerDTO> createCustomer(@RequestBody @Valid CustomerAndCredentialCreationForm customerForm,
                                                UriComponentsBuilder uriBuilder);
 
-    @GetMapping("private/v1/customer/{customerId}")
+    @GetMapping("private/v1/customer/{customerId}/cost")
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity<CustomerTotalMonthlyCostDTO> getTotalMonthlyCost(@PathVariable UUID customerId);
 }

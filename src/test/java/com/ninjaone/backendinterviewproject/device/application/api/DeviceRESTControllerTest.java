@@ -1,6 +1,7 @@
 package com.ninjaone.backendinterviewproject.device.application.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ninjaone.backendinterviewproject.BackendInterviewProjectApplication;
 import com.ninjaone.backendinterviewproject.device.application.service.DeviceService;
 import com.ninjaone.backendinterviewproject.device.domain.Device;
 import com.ninjaone.backendinterviewproject.device.domain.DeviceType;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -27,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(DeviceRESTController.class)
+@ContextConfiguration(classes = {BackendInterviewProjectApplication.class})
 @AutoConfigureMockMvc
 @AutoConfigureDataJpa
 @ActiveProfiles("test")
@@ -54,21 +57,6 @@ class DeviceRESTControllerTest {
         when(deviceService.getDeviceById(UUID.fromString(DEVICE_ID))).thenReturn(device);
 
         mockMvc.perform(get(PRIVATE_DEVICE_PATH_WITHOUT_CUSTOMER_ID.concat("/").concat(DEVICE_ID)))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(objectMapper.writeValueAsString(new DeviceDTO(device))));
-    }
-
-    @Test
-    @WithMockUser(value = "spring")
-    void mustCreateDevice() throws Exception {
-        var device = Device.builder().id(UUID.fromString(DEVICE_ID)).systemName("teste").type(DeviceType.MAC).build();
-
-        when(deviceService.createDevice(device, UUID.fromString(DEVICE_ID))).thenReturn(device);
-
-        mockMvc.perform(post(PRIVATE_DEVICE_PATH_WITH_CUSTOMER_ID)
-                        .content(objectMapper.writeValueAsString(new DeviceForm(device.getSystemName(), device.getType())))
-                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(objectMapper.writeValueAsString(new DeviceDTO(device))));

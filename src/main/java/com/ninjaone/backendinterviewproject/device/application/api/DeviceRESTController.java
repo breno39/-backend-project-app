@@ -1,6 +1,7 @@
 package com.ninjaone.backendinterviewproject.device.application.api;
 
 import com.ninjaone.backendinterviewproject.device.application.service.DeviceService;
+import com.ninjaone.backendinterviewproject.device.domain.Device;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class DeviceRESTController implements DeviceAPI {
                                                   UUID customerId,
                                                   UriComponentsBuilder uriBuilder) {
         logger.info("[START] - DeviceRESTController - createDevice");
-        var createdDevice = service.createDevice(createDeviceForm.toEntity(), customerId);
+        Device createdDevice = service.createDevice(createDeviceForm.toEntity(), customerId);
         URI uri = uriBuilder.path(DEVICE_CREATED_PATH.concat(createdDevice.getId().toString()))
                 .buildAndExpand(createdDevice.getId()).toUri();
         logger.info("Device {} created", createdDevice.getId());
