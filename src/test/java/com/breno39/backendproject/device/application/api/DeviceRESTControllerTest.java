@@ -2,9 +2,9 @@ package com.breno39.backendproject.device.application.api;
 
 import com.breno39.backendproject.BackendProjectApplication;
 import com.breno39.backendproject.device.application.service.DeviceService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.breno39.backendproject.device.domain.Device;
 import com.breno39.backendproject.device.domain.DeviceType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

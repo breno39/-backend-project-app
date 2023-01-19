@@ -1,10 +1,10 @@
-# NinjaOne Backend Interview Project
+# Backend Project
 
 The project is configured to use an in-memory H2 database that is volatile. This API contains all the main features' 
 described in the given documentation for the test.
 ## Starting the Application
 
-Run the `BackendInterviewProjectApplication` class with the `prod` or build the app with `gradle build` and then execute
+Run the `BackendProjectApplication` class with the `prod` or build the app with `gradle build` and then execute
 the docker-compose on the project's root directory, after that the endpoints can be better visualized at the Swagger main
 page, the application is configured to use port 8080
 
@@ -27,7 +27,3 @@ Just input those credentials at the `/authenticate` endpoint in Authentication A
 public routes don't need authentication, but with private end-point authentication is mandatory.
 
 After that you can freely use the API.
-
-### Suggestions
-
-Feel free to remove or repurpose the existing Sample Repository, Entity, Controller, and Service. 
