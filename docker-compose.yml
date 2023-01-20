@@ -1,8 +1,35 @@
 version: "3.5"
 services:
   interview-project:
-     build: .
-     ports:
-       - "8080:8080"
-     environment:
-       - "SPRING_PROFILES_ACTIVE=prod"
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=prod"
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+    restart: always
+    logging:
+        options:
+          max-size: 1g
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongodb_data_container:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8075:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+
+volumes:
+  mongodb_data_container:
