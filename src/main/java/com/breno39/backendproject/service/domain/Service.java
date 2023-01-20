@@ -1,6 +1,6 @@
 package com.breno39.backendproject.service.domain;
 
-import com.breno39.backendproject.device.domain.Device;
+import com.breno39.backendproject.service.domain.domain.Device;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -39,9 +39,8 @@ public class Service {
 
     private Long monthlyCost;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, updatable = false)
-    @EqualsAndHashCode.Include
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private ServiceType type;
 
     public Service(ServiceType type) {

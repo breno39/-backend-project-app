@@ -2,7 +2,7 @@ package com.breno39.backendproject.service.application.service;
 
 import com.breno39.backendproject.device.application.service.DeviceService;
 import com.breno39.backendproject.handler.ApiException;
-import com.breno39.backendproject.device.domain.Device;
+import com.breno39.backendproject.service.domain.domain.Device;
 import com.breno39.backendproject.service.domain.ServiceType;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -22,14 +22,14 @@ public class ServiceSpringDataJPAService implements ServiceService{
     @Override
     public ServiceType[] getAvailableServices() {
         logger.info("[START] - ServiceSpringDataJPAService - getAvailableServices");
-        var availableServiceTypes = ServiceType.values();
+        var availableServiceTypes = 0;
         logger.info("[FINISH] - ServiceSpringDataJPAService - getAvailableServices");
-        return availableServiceTypes;
+        return null;
     }
 
     @Override
-    public com.breno39.backendproject.service.domain.Service addAvailableServiceToDevice(ServiceType type, UUID deviceId) {
-        logger.info("[START] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
+    public com.breno39.backendproject.service.domain.Service addAvailableServiceToDevice(UUID type, UUID deviceId) {
+        /*logger.info("[START] - ServiceSpringDataJPAService - addAvailableServiceToDevice");
         Device returnedDevice = deviceService.getDeviceById(deviceId);
         if(returnedDevice.getServiceByServiceType(type).isEmpty()) {
             var newService = new com.breno39.backendproject.service.domain.Service(type);
@@ -41,19 +41,20 @@ public class ServiceSpringDataJPAService implements ServiceService{
             return returnedDevice.getServiceByServiceType(type).get();
         } else {
             throw ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service already exists in Device");
-        }
+        }*/
+        return null;
     }
 
     @Override
-    public void removeAvailableServiceFromDevice(ServiceType type, UUID deviceId) {
-        logger.info("[START] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
-        Device returnedDevice = deviceService.getDeviceById(deviceId);
-        var returnedService = returnedDevice.getServiceByServiceType(type)
-                .orElseThrow(() -> ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service do not exists in Device"));
-        returnedDevice.removeService(returnedService);
-        deviceService.updateDevice(returnedDevice, deviceId);
-        logger.info("removed service of type {} of Device {}", type, deviceId);
-        logger.info("[FINISH] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
+    public void removeAvailableServiceFromDevice(UUID type, UUID deviceId) {
+//        logger.info("[START] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
+//        Device returnedDevice = deviceService.getDeviceById(deviceId);
+//        var returnedService = returnedDevice.getServiceByServiceType(type)
+//                .orElseThrow(() -> ApiException.throwApiException(HttpStatus.BAD_REQUEST, "Service do not exists in Device"));
+//        returnedDevice.removeService(returnedService);
+//        deviceService.updateDevice(returnedDevice, deviceId);
+//        logger.info("removed service of type {} of Device {}", type, deviceId);
+//        logger.info("[FINISH] - ServiceSpringDataJPAService - removeAvailableServiceFromDevice");
     }
 
     private void checkServiceCompatibility(Device device, ServiceType type) {

@@ -1,19 +1,31 @@
 package com.breno39.backendproject.service.domain;
 
-import com.breno39.backendproject.device.domain.OperatingSystem;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.breno39.backendproject.service.domain.domain.OperatingSystem;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
+import java.util.UUID;
+
+@Entity
+@Data
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-public enum ServiceType {
-    WINDOWS_ANTIVIRUS(5L, OperatingSystem.WINDOWS),
-    MAC_ANTIVIRUS(7L, OperatingSystem.MAC),
-    SCREENSHARE(1L, OperatingSystem.ANY),
-    BACKUP(3L, OperatingSystem.ANY),
-    PSA(2L, OperatingSystem.ANY);
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class ServiceType {
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @EqualsAndHashCode.Include
+    private UUID id;
 
-    private final Long cost;
-    private final OperatingSystem system;
+    private String name;
+
+    private Long cost;
+
+    @ManyToOne
+    @JoinColumn(name = "system_id")
+    private OperatingSystem system;
 
 }

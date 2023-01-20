@@ -20,7 +20,7 @@ import java.util.UUID;
 @SecurityRequirement(name = "openApiAuth")
 @Tag(name = "Services API", description = "Contains the CRUD of the Service domain")
 public class ServiceRESTController implements ServiceAPI{
-    private static final String SERVICE_CREATED_PATH = "ninjaone/app/v1/service/";
+    private static final String SERVICE_CREATED_PATH = "app/v1/service/";
     private final Logger logger = LoggerFactory.getLogger(ServiceRESTController.class);
     private final ServiceService service;
 
@@ -38,7 +38,7 @@ public class ServiceRESTController implements ServiceAPI{
     public ResponseEntity<ServiceDTO> addAvailableServiceToDevice(ServiceForm serviceForm, UUID deviceId,
                                                                   UriComponentsBuilder uriBuilder) {
         logger.info("[START] - ServiceRESTController - addAvailableServiceToDevice");
-        Service createdService = service.addAvailableServiceToDevice(serviceForm.getType(), deviceId);
+        Service createdService = service.addAvailableServiceToDevice(serviceForm.getServiceTypeId(), deviceId);
         URI uri = uriBuilder.path(SERVICE_CREATED_PATH.concat(createdService.getId().toString()))
                         .buildAndExpand(createdService.getId()).toUri();
         logger.info("[FINISH] - ServiceRESTController - addAvailableServiceToDevice");
@@ -49,7 +49,7 @@ public class ServiceRESTController implements ServiceAPI{
     @Operation(operationId = "removeAvailableServiceFromDevice", description = "End-point used to remove one of the available service types of an existing Device", summary = "remove service from device")
     public void removeAvailableServiceFromDevice(ServiceForm serviceForm, UUID deviceId) {
         logger.info("[START] - ServiceRESTController - removeAvailableServiceFromDevice");
-        service.removeAvailableServiceFromDevice(serviceForm.getType(), deviceId);
+        service.removeAvailableServiceFromDevice(serviceForm.getServiceTypeId(), deviceId);
         logger.info("[FINISH] - ServiceRESTController - removeAvailableServiceFromDevice");
     }
 }

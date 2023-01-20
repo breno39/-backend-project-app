@@ -1,4 +1,4 @@
-package com.breno39.backendproject.device.domain;
+package com.breno39.backendproject.service.domain.domain;
 
 import com.breno39.backendproject.customer.domain.Customer;
 import com.breno39.backendproject.service.domain.Service;
@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Setter()
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -51,7 +51,8 @@ public class Device {
     @EqualsAndHashCode.Include
     private String systemName;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private DeviceType type;
 
     @Builder.Default
@@ -79,7 +80,8 @@ public class Device {
     }
 
     public boolean isCompatible(ServiceType type) {
-        return this.type.getSystem() == type.getSystem() || OperatingSystem.ANY == type.getSystem();
+        return this.type.getSystem() == type.getSystem()
+                || OperatingSystem.ANY.equals(type.getSystem().getCompatibilityType());
     }
 
     public Optional<Service> getServiceByServiceType(ServiceType type) {

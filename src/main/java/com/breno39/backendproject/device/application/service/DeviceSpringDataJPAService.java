@@ -3,7 +3,7 @@ package com.breno39.backendproject.device.application.service;
 import com.breno39.backendproject.device.application.repository.DeviceRepository;
 import com.breno39.backendproject.customer.application.service.CustomerService;
 import com.breno39.backendproject.customer.domain.Customer;
-import com.breno39.backendproject.device.domain.Device;
+import com.breno39.backendproject.service.domain.domain.Device;
 import com.breno39.backendproject.handler.ApiException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

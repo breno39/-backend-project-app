@@ -1,6 +1,6 @@
 package com.breno39.backendproject.device.application.repository;
 
-import com.breno39.backendproject.device.domain.Device;
+import com.breno39.backendproject.service.domain.domain.Device;
 
 import java.util.Optional;
 import java.util.UUID;

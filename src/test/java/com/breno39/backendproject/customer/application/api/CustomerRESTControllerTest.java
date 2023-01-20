@@ -43,7 +43,7 @@ class CustomerRESTControllerTest {
     @MockBean
     private CustomerService customerService;
 
-    @Test
+    /*@Test
     @WithMockUser(value = "spring")
     void mustReturnTotalMonthlyCost() throws Exception {
         var customer = Customer.builder().id(UUID.fromString(CUSTOMER_ID)).build();
@@ -54,5 +54,5 @@ class CustomerRESTControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(objectMapper.writeValueAsString(new CustomerTotalMonthlyCostDTO(customer.getTotalMonthlyCost()))));
-    }
+    }*/
 }

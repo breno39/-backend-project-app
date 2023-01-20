@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface ServiceService {
     ServiceType[] getAvailableServices();
 
-    com.breno39.backendproject.service.domain.Service addAvailableServiceToDevice(ServiceType service, UUID deviceId);
+    com.breno39.backendproject.service.domain.Service addAvailableServiceToDevice(UUID ServiceTypeId, UUID deviceId);
 
-    void removeAvailableServiceFromDevice(ServiceType type, UUID deviceId);
+    void removeAvailableServiceFromDevice(UUID ServiceTypeId, UUID deviceId);
 }

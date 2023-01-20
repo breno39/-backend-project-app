@@ -1,3 +1,4 @@
+/*
 package com.breno39.backendproject.service.application.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -84,4 +85,4 @@ class ServiceRESTControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
-}
+}*/

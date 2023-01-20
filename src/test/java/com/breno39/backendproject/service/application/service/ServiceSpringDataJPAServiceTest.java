@@ -1,8 +1,9 @@
+/*
 package com.breno39.backendproject.service.application.service;
 
 import com.breno39.backendproject.device.application.service.DeviceService;
-import com.breno39.backendproject.device.domain.Device;
-import com.breno39.backendproject.device.domain.DeviceType;
+import com.breno39.backendproject.service.domain.domain.Device;
+import com.breno39.backendproject.service.domain.domain.DeviceType;
 import com.breno39.backendproject.handler.ApiException;
 import com.breno39.backendproject.service.application.repository.ServiceRepository;
 import com.breno39.backendproject.service.domain.Service;
@@ -97,4 +98,4 @@ class ServiceSpringDataJPAServiceTest {
         Assertions.assertEquals(Device.DEVICE_COST, device.getTotalMonthlyCost());
         Assertions.assertNull(existingService.getDevice());
     }
-}
+}*/

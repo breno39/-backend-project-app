@@ -1,7 +1,7 @@
 package com.breno39.backendproject.device.infrastructure;
 
 import com.breno39.backendproject.device.application.repository.DeviceRepository;
-import com.breno39.backendproject.device.domain.Device;
+import com.breno39.backendproject.service.domain.domain.Device;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

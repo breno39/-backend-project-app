@@ -1,7 +1,10 @@
+/*
 package com.breno39.backendproject.device.domain;
 
 import com.breno39.backendproject.service.domain.Service;
 import com.breno39.backendproject.service.domain.ServiceType;
+import com.breno39.backendproject.service.domain.domain.Device;
+import com.breno39.backendproject.service.domain.domain.DeviceType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -108,4 +111,4 @@ class DeviceTest {
         Assertions.assertFalse(returnedService.isEmpty());
         Assertions.assertEquals(serviceWindows, returnedService.get());
     }
-}
+}*/

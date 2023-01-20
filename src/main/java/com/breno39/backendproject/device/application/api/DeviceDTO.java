@@ -1,7 +1,7 @@
 package com.breno39.backendproject.device.application.api;
 
-import com.breno39.backendproject.device.domain.Device;
-import com.breno39.backendproject.device.domain.DeviceType;
+import com.breno39.backendproject.service.domain.domain.Device;
+import com.breno39.backendproject.service.domain.domain.DeviceType;
 import lombok.Getter;
 
 @Getter

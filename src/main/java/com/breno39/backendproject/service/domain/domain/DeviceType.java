@@ -1,14 +1,28 @@
-package com.breno39.backendproject.device.domain;
+package com.breno39.backendproject.service.domain.domain;
 
-import lombok.Getter;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
-@Getter
-public enum DeviceType {
-    WINDOWS_WORKSTATION(OperatingSystem.WINDOWS), WINDOWS_SERVER(OperatingSystem.WINDOWS), MAC(OperatingSystem.MAC);
+import javax.persistence.*;
+import java.util.UUID;
 
+@Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class DeviceType {
+
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @EqualsAndHashCode.Include
+    private UUID id;
+
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "system_id")
     private OperatingSystem system;
-
-    DeviceType(OperatingSystem system) {
-        this.system = system;
-    }
 }

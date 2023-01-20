@@ -1,7 +1,7 @@
 package com.breno39.backendproject.customer.domain;
 
 import com.breno39.backendproject.credencial.domain.Credential;
-import com.breno39.backendproject.device.domain.Device;
+import com.breno39.backendproject.service.domain.domain.Device;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;

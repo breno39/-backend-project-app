@@ -1,6 +1,6 @@
 package com.breno39.backendproject.device.application.service;
 
-import com.breno39.backendproject.device.domain.Device;
+import com.breno39.backendproject.service.domain.domain.Device;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
